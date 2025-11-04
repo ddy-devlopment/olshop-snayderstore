@@ -620,21 +620,7 @@ refreshBtn.addEventListener('click', () => {
         document.addEventListener('DOMContentLoaded', () => {
             fetchProducts();
         });
-        
-// Deteksi perubahan tinggi viewport (biasanya terjadi saat URL bar muncul di mobile)
-let initialHeight = window.innerHeight;
-
-window.addEventListener('resize', () => {
-    const themeToggle = document.querySelector('.theme-toggle');
-    if (!themeToggle) return;
-
-    // Jika tinggi layar berkurang (artinya URL bar muncul)
-    if (window.innerHeight < initialHeight - 50) {
-        themeToggle.classList.add('safe'); // tombol naik
-    } else {
-        themeToggle.classList.remove('safe'); // kembali ke posisi semula
-    }
-});
+   
     </script>
 </body>
 </html>
