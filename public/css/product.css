@@ -1199,34 +1199,3 @@
                 height: 70px;
             }
         }
-/* --- Awal: posisi default aman --- */
-.theme-toggle {
-    position: fixed;
-    bottom: 70px;
-    left: 20px;
-    right: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 14px;
-    border-radius: 10px;
-    background: var(--sidebar-bg, #1e1e2d);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    z-index: 999;
-    transition: all 0.3s ease;
-}
-
-/* Saat URL bar muncul, tombol otomatis naik */
-.theme-toggle.safe {
-    bottom: 120px; /* naik ke atas agar tetap terlihat */
-}
-
-/* Desktop tetap menempel bawah */
-@media (min-width: 768px) {
-    .theme-toggle, .theme-toggle.safe {
-        position: absolute;
-        bottom: 30px;
-        left: 20px;
-        right: 20px;
-    }
-}
