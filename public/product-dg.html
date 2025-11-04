@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - ProductDash</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/product-dg.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="checkout-header">
+        <div class="header-left">
+            <button class="back-btn" onclick="window.history.back()">
+                <i class="fas fa-arrow-left"></i>
+                <span>Kembali</span>
+            </button>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <h1>ProductDash</h1>
+            </div>
+        </div>
+        <div class="cart-icon" onclick="goToCart()">
+            <i class="fas fa-shopping-cart"></i>
+            <div class="cart-counter" id="cartCounter" style="display: none;">0</div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="checkout-container" id="checkout-container" style="display: none;">
+        <!-- Left Column: Product Summary, Shipping, Payment -->
+        <div class="checkout-main">
+            <!-- Product Summary -->
+            <section class="checkout-section">
+                <h2 class="section-title">
+                    <i class="fas fa-shopping-bag"></i>
+                    Ringkasan Produk
+                </h2>
+                
+                <div class="product-card">
+                    <!-- Header produk dengan gambar dan nama -->
+                    <div class="product-header">
+                        <div class="product-image">
+                            <img id="product-img" src="" alt="Product Image" style="display: none;">
+                            <i id="product-icon" class="fas fa-cube"></i>
+                        </div>
+                        <div>
+                            <div class="product-name" id="product-name">Memuat produk...</div>
+                            <!-- Deskripsi produk singkat -->
+                            <div class="product-desc" id="product-short-desc">
+                                Memuat deskripsi produk...
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Konten utama produk -->
+                    <div>
+                        <!-- Deskripsi produk lengkap yang dapat digeser -->
+                        <div class="product-full-desc">
+                            <div class="desc-label">Deskripsi Lengkap:</div>
+                            <div class="desc-content" id="product-full-desc">
+                                Memuat deskripsi lengkap produk...
+                            </div>
+                        </div>
+                        
+                        <div class="product-package" id="product-variants-container">
+                            <!-- Varian akan diisi secara dinamis -->
+                        </div>
+                        
+                        <div class="product-prices">
+                            <span class="old-price" id="product-original-price">Rp 0</span>
+                            <span class="new-price" id="product-price">Rp 0</span>
+                            <span class="discount-badge" id="product-discount" style="display: none;">0%</span>
+                        </div>
+                        
+                        <div class="stock-badge in-stock" id="product-stock">In Stock ✅</div>
+                        
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="updateQuantity(-1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span class="quantity-display" id="product-qty">1</span>
+                            <button class="quantity-btn" onclick="updateQuantity(1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="product-total" id="product-total">Total: Rp 0</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Buyer Information -->
+            <section class="checkout-section">
+                <h2 class="section-title">
+                    <i class="fas fa-user"></i>
+                    Data Pembeli
+                </h2>
+                
+                <div class="form-group">
+                    <label class="form-label" for="fullname">Nama Lengkap</label>
+                    <input type="text" id="fullname" class="form-input" placeholder="Masukkan nama lengkap">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="phone">Nomor WhatsApp</label>
+                    <input type="tel" id="phone" class="form-input" placeholder="Contoh: 08123456789">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="city">Kota / Provinsi</label>
+                    <input type="text" id="city" class="form-input" placeholder="Masukkan kota dan provinsi">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="message">Pesan Opsional</label>
+                    <textarea id="message" class="form-textarea" placeholder="Masukkan pesan atau catatan tambahan (opsional)"></textarea>
+                </div>
+            </section>
+
+            <!-- Payment Method -->
+            <section class="checkout-section">
+                <h2 class="section-title">
+                    <i class="fas fa-credit-card"></i>
+                    Metode Pembayaran
+                </h2>
+                
+                <div class="payment-options">
+                    <div class="payment-option" onclick="selectPayment('qris')">
+                        <div class="payment-radio"></div>
+                        <div class="payment-icon">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <div class="payment-details">
+                            <div class="payment-name">QRIS</div>
+                            <div class="payment-desc">Scan QR code untuk pembayaran</div>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-option" onclick="selectPayment('dana')">
+                        <div class="payment-radio"></div>
+                        <div class="payment-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="payment-details">
+                            <div class="payment-name">E-Wallet (DANA)</div>
+                            <div class="payment-desc">Transfer via DANA</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Right Column: Order Summary -->
+        <div class="checkout-sidebar">
+            <div class="order-summary">
+                <h2 class="section-title">
+                    <i class="fas fa-receipt"></i>
+                    Ringkasan Pembayaran
+                </h2>
+                
+                <div class="summary-row">
+                    <span class="summary-label">Subtotal</span>
+                    <span class="summary-value" id="subtotal">Rp 0</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span class="summary-label">Diskon</span>
+                    <span class="summary-value" id="discount">-Rp 0</span>
+                </div>
+                
+                <div class="summary-divider"></div>
+                
+                <div class="total-row">
+                    <span class="total-label">Total Bayar</span>
+                    <span class="total-value" id="total">Rp 0</span>
+                </div>
+                
+                <!-- Container tombol baru -->
+                <div class="button-container">
+                    <button class="add-to-cart-btn" id="addToCartBtn">
+                        <i class="fas fa-cart-plus"></i>
+                        Keranjang
+                    </button>
+                    <button class="pay-btn" onclick="processPayment()">
+                        <i class="fab fa-whatsapp"></i>
+                        Bayar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-container" id="loading-container">
+        <div class="loading-spinner"></div>
+        <div>Memuat produk...</div>
+    </div>
+
+    <!-- Error State -->
+    <div class="error-container" id="error-container" style="display: none;">
+        <div class="error-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h2>Produk Tidak Ditemukan</h2>
+        <p>Maaf, produk yang Anda cari tidak ditemukan atau mungkin telah dihapus.</p>
+        <button class="back-btn" onclick="window.history.back()">
+            <i class="fas fa-arrow-left"></i>
+            <span>Kembali ke Halaman Sebelumnya</span>
+        </button>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="notification-text">Pesanan berhasil dikirim via WhatsApp!</div>
+    </div>
+
+    <script>
+        // Variabel global
+        let currentProduct = null;
+        let selectedVariantIndex = 0;
+        let quantity = 1;
+        let selectedPayment = localStorage.getItem('selectedPayment') || 'qris';
+
+        // Fungsi untuk mengambil parameter ID dari URL
+        function getProductIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        // Fungsi untuk mengambil data produk dari API
+        async function fetchProduct(productId) {
+            try {
+                const API_URL = '/api/products';
+                const response = await fetch(API_URL);
+                if (!response.ok) {
+                    throw new Error('Gagal mengambil data produk');
+                }
+                
+                const products = await response.json();
+                const product = products.find(p => p.id === productId);
+                
+                if (!product) {
+                    throw new Error('Produk tidak ditemukan');
+                }
+                
+                return product;
+            } catch (error) {
+                console.error('Error fetching product:', error);
+                throw error;
+            }
+        }
+
+        // Fungsi untuk menampilkan produk di halaman
+        function renderProduct(product) {
+            document.getElementById('product-name').textContent = product.nama;
+            document.getElementById('product-short-desc').textContent = product.deskripsi_singkat;
+            document.getElementById('product-full-desc').innerHTML = product.deskripsi_lengkap;
+            
+            const productImg = document.getElementById('product-img');
+            const productIcon = document.getElementById('product-icon');
+            
+            if (product.gambar && product.gambar.trim() !== '') {
+                productImg.src = product.gambar;
+                productImg.style.display = 'block';
+                productIcon.style.display = 'none';
+            } else {
+                productImg.style.display = 'none';
+                productIcon.style.display = 'flex';
+            }
+            
+            const stockBadge = document.getElementById('product-stock');
+            stockBadge.className = 'stock-badge';
+            
+            let stockText = '';
+            switch (product.stok) {
+                case 'in-stock':
+                    stockBadge.classList.add('in-stock');
+                    stockText = 'In Stock ✅';
+                    break;
+                case 'low-stock':
+                    stockBadge.classList.add('low-stock');
+                    stockText = 'Stok Terbatas ⚠️';
+                    break;
+                case 'out-of-stock':
+                    stockBadge.classList.add('out-of-stock');
+                    stockText = 'Stok Habis ❌';
+                    break;
+                default:
+                    stockBadge.classList.add('in-stock');
+                    stockText = 'In Stock ✅';
+            }
+            stockBadge.textContent = stockText;
+            
+            renderProductVariants(product.varian);
+            updateProductDetails();
+            updateOrderSummary();
+        }
+
+        // Fungsi untuk merender varian produk
+        function renderProductVariants(variants) {
+            const variantsContainer = document.getElementById('product-variants-container');
+            variantsContainer.innerHTML = '';
+            
+            if (!variants || variants.length === 0) {
+                variantsContainer.style.display = 'none';
+                return;
+            }
+            
+            variantsContainer.style.display = 'block';
+            
+            const label = document.createElement('div');
+            label.className = 'package-label';
+            label.textContent = 'Pilih Varian:';
+            variantsContainer.appendChild(label);
+            
+            const optionsContainer = document.createElement('div');
+            optionsContainer.className = 'package-options';
+            
+            variants.forEach((variant, index) => {
+                const option = document.createElement('div');
+                option.className = `package-option ${index === 0 ? 'selected' : ''}`;
+                option.dataset.index = index;
+                option.textContent = variant.name;
+                option.addEventListener('click', () => selectVariant(index));
+                optionsContainer.appendChild(option);
+            });
+            
+            variantsContainer.appendChild(optionsContainer);
+        }
+
+        // Fungsi untuk memilih varian
+        function selectVariant(index) {
+            selectedVariantIndex = index;
+            
+            document.querySelectorAll('.package-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            document.querySelector(`.package-option[data-index="${index}"]`).classList.add('selected');
+            
+            updateProductDetails();
+            updateOrderSummary();
+        }
+
+        // Update quantity produk
+        function updateQuantity(change) {
+            quantity += change;
+            
+            if (quantity < 1) {
+                quantity = 1;
+            }
+            
+            document.getElementById('product-qty').textContent = quantity;
+            updateProductDetails();
+            updateOrderSummary();
+        }
+
+        // Update detail produk
+        function updateProductDetails() {
+            if (!currentProduct || !currentProduct.varian || currentProduct.varian.length === 0) return;
+            
+            const variant = currentProduct.varian[selectedVariantIndex];
+            const originalPrice = variant.harga_asli;
+            const discountedPrice = variant.harga_diskon;
+            
+            const discountPercentage = originalPrice > discountedPrice ? 
+                Math.round(((originalPrice - discountedPrice) / originalPrice) * 100) : 0;
+            
+            document.getElementById('product-original-price').textContent = `Rp ${formatCurrency(originalPrice)}`;
+            document.getElementById('product-price').textContent = `Rp ${formatCurrency(discountedPrice)}`;
+            
+            const discountBadge = document.getElementById('product-discount');
+            if (discountPercentage > 0) {
+                discountBadge.textContent = `${discountPercentage}%`;
+                discountBadge.style.display = 'inline';
+            } else {
+                discountBadge.style.display = 'none';
+            }
+            
+            const total = discountedPrice * quantity;
+            document.getElementById('product-total').textContent = `Total: Rp ${formatCurrency(total)}`;
+        }
+
+        // Pilih metode pembayaran
+        function selectPayment(method) {
+            selectedPayment = method;
+            localStorage.setItem('selectedPayment', method);
+            
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            if (method === 'qris') {
+                document.querySelector('.payment-option:nth-child(1)').classList.add('selected');
+            } else if (method === 'dana') {
+                document.querySelector('.payment-option:nth-child(2)').classList.add('selected');
+            }
+        }
+
+        // Update ringkasan pesanan
+        function updateOrderSummary() {
+            if (!currentProduct || !currentProduct.varian || currentProduct.varian.length === 0) return;
+            
+            const variant = currentProduct.varian[selectedVariantIndex];
+            const subtotal = variant.harga_diskon * quantity;
+            const discountAmount = (variant.harga_asli - variant.harga_diskon) * quantity;
+            const total = subtotal;
+            
+            document.getElementById('subtotal').textContent = `Rp ${formatCurrency(subtotal)}`;
+            document.getElementById('discount').textContent = `-Rp ${formatCurrency(discountAmount)}`;
+            document.getElementById('total').textContent = `Rp ${formatCurrency(total)}`;
+        }
+
+        // Format mata uang
+        function formatCurrency(amount) {
+            return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Fungsi untuk update counter keranjang
+        function updateCartCounter() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.length;
+            
+            const cartCounter = document.getElementById('cartCounter');
+            if (cartCounter) {
+                cartCounter.textContent = totalItems > 99 ? '99+' : totalItems;
+                cartCounter.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+        }
+
+        // Fungsi untuk mendapatkan data pembeli terkini
+        function getCurrentBuyerData() {
+            return {
+                fullname: document.getElementById('fullname').value,
+                phone: document.getElementById('phone').value,
+                city: document.getElementById('city').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString()
+            };
+        }
+
+        // Fungsi untuk memulihkan data dari keranjang
+        function restoreProductData() {
+            const restoreData = localStorage.getItem('restoreProductData');
+            
+            if (!restoreData) return false;
+            
+            try {
+                const data = JSON.parse(restoreData);
+                
+                // Cek apakah data sesuai dengan produk yang sedang dilihat
+                if (data.productId !== currentProduct.id) {
+                    localStorage.removeItem('restoreProductData');
+                    return false;
+                }
+                
+                // Set quantity
+                quantity = data.quantity || 1;
+                document.getElementById('product-qty').textContent = quantity;
+                
+                // Set varian jika ada
+                if (data.variant && currentProduct.varian) {
+                    const variantIndex = currentProduct.varian.findIndex(v => v.name === data.variant);
+                    if (variantIndex !== -1) {
+                        selectVariant(variantIndex);
+                    }
+                }
+                
+                // Isi form data pembeli
+                if (data.buyerData) {
+                    document.getElementById('fullname').value = data.buyerData.fullname || '';
+                    document.getElementById('phone').value = data.buyerData.phone || '';
+                    document.getElementById('city').value = data.buyerData.city || '';
+                    document.getElementById('message').value = data.buyerData.message || '';
+                }
+                
+                // Update tampilan
+                updateProductDetails();
+                updateOrderSummary();
+                
+                // Hapus data restore setelah digunakan
+                localStorage.removeItem('restoreProductData');
+                
+                return true;
+            } catch (error) {
+                console.error('Error restoring product data:', error);
+                localStorage.removeItem('restoreProductData');
+                return false;
+            }
+        }
+
+        // Fungsi untuk menambahkan produk ke keranjang dengan data pembeli spesifik
+        function addToCart() {
+            if (!currentProduct) return;
+            
+            // Validasi form data pembeli
+            const fullname = document.getElementById('fullname').value;
+            const phone = document.getElementById('phone').value;
+            const city = document.getElementById('city').value;
+            
+            if (!fullname || !phone || !city) {
+                alert('Harap lengkapi semua data pembeli sebelum menambahkan ke keranjang!');
+                return;
+            }
+            
+            const variant = currentProduct.varian[selectedVariantIndex];
+            
+            // Buat ID unik berdasarkan product ID dan varian
+            const cartItemId = `${currentProduct.id}-${variant.name}`;
+            
+            // Dapatkan data pembeli terkini - SETIAP PRODUK MENYIMPAN DATA PEMBELI SENDIRI
+            const buyerData = getCurrentBuyerData();
+            
+            const item = {
+                id: cartItemId,
+                productId: currentProduct.id,
+                name: currentProduct.nama,
+                variant: variant.name,
+                quantity: quantity,
+                price: variant.harga_diskon,
+                originalPrice: variant.harga_asli,
+                image: currentProduct.gambar || '',
+                discount: ((variant.harga_asli - variant.harga_diskon) / variant.harga_asli) * 100,
+                total: variant.harga_diskon * quantity,
+                selected: false,
+                // SETIAP ITEM MENYIMPAN DATA PEMBELI YANG BERBEDA
+                buyerData: buyerData
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Cek apakah produk dengan varian yang sama sudah ada di keranjang
+            const existingItemIndex = cart.findIndex(cartItem => cartItem.id === cartItemId);
+            
+            if (existingItemIndex !== -1) {
+                // Jika sudah ada, update quantity-nya TAPI JANGAN UPDATE DATA PEMBELI
+                // Biarkan data pembeli tetap sesuai saat pertama kali ditambahkan
+                cart[existingItemIndex].quantity += quantity;
+                cart[existingItemIndex].total = cart[existingItemIndex].price * cart[existingItemIndex].quantity;
+            } else {
+                // Jika belum ada, tambahkan item baru dengan data pembeli saat ini
+                cart.push(item);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCounter();
+
+            // Reset form setelah berhasil menambahkan ke keranjang
+            document.getElementById('fullname').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('city').value = '';
+            document.getElementById('message').value = '';
+            quantity = 1;
+            document.getElementById('product-qty').textContent = quantity;
+            updateProductDetails();
+            updateOrderSummary();
+        }
+
+        // Proses pembayaran langsung dari halaman produk
+        function processPayment() {
+            if (!currentProduct) return;
+            
+            // Validasi form
+            const fullname = document.getElementById('fullname').value;
+            const phone = document.getElementById('phone').value;
+            const city = document.getElementById('city').value;
+            const message = document.getElementById('message').value;
+            
+            if (!fullname || !phone || !city) {
+                alert('Harap lengkapi semua data pembeli!');
+                return;
+            }
+            
+            // Buat pesan WhatsApp
+            const variant = currentProduct.varian[selectedVariantIndex];
+            const subtotal = variant.harga_diskon * quantity;
+            const discountAmount = (variant.harga_asli - variant.harga_diskon) * quantity;
+            const total = subtotal;
+            
+            const paymentMethod = selectedPayment === 'qris' ? 'QRIS' : 'DANA';
+            
+            // Buat pesan WhatsApp dengan format yang lebih rapi
+            let whatsappMessage = `🛒 *PEMESANAN DARI WEBSITE PRODUCTDASH* 🛒%0A%0A`;
+
+            // Detail produk
+            whatsappMessage += `📦 *DETAIL PRODUK*:%0A`;
+            whatsappMessage += `╔═══════════════════════╗%0A`;
+            whatsappMessage += `║ *${currentProduct.nama}*%0A`;
+            whatsappMessage += `║ ┣━━ Varian: ${variant.name}%0A`;
+            whatsappMessage += `║ ┣━━ Jumlah: ${quantity}x%0A`;
+            whatsappMessage += `║ ┣━━ Harga: Rp ${formatCurrency(variant.harga_diskon)}%0A`;
+            whatsappMessage += `║ ┗━━ Subtotal: Rp ${formatCurrency(total)}%0A`;
+            whatsappMessage += `╚═══════════════════════╝%0A%0A`;
+
+            // Total harga
+            whatsappMessage += `💰 *RINGKASAN PEMBAYARAN*:%0A`;
+            whatsappMessage += `┏━━━━━━━━━━━━━━━━━━━━┓%0A`;
+            whatsappMessage += `┃ Total: Rp ${formatCurrency(total)}%0A`;
+            whatsappMessage += `┗━━━━━━━━━━━━━━━━━━━━┛%0A%0A`;
+
+            // Metode Pembayaran
+            whatsappMessage += `💳 *METODE PEMBAYARAN*: ${paymentMethod}%0A%0A`;
+
+            // Data pembeli
+            whatsappMessage += `👤 *INFORMASI PEMBELI*:%0A`;
+            whatsappMessage += `┏━━━━━━━━━━━━━━━━━━━━┓%0A`;
+            whatsappMessage += `┃ 📛 Nama: ${fullname}%0A`;
+            whatsappMessage += `┃ 📱 WhatsApp: ${phone}%0A`;
+            whatsappMessage += `┃ 🏠 Kota: ${city}%0A`;
+            
+            if (message && message.trim() !== '') {
+                whatsappMessage += `┃ 💬 Pesan: ${message}%0A`;
+            }
+            
+            whatsappMessage += `┗━━━━━━━━━━━━━━━━━━━━┛%0A%0A`;
+
+            // Footer
+            whatsappMessage += `_📦 Pesanan ini dibuat melalui website ProductDash_%0A`;
+            whatsappMessage += `_⏰ Mohon konfirmasi ketersediaan stok terlebih dahulu_`;
+
+            const whatsappUrl = `https://wa.me/6287866361260?text=${whatsappMessage}`;
+            
+            // Buka WhatsApp
+            window.open(whatsappUrl, '_blank');
+            
+            // Tampilkan notifikasi
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Fungsi untuk pergi ke halaman keranjang
+        function goToCart() {
+            window.location.href = 'keranjang.html';
+        }
+
+        // Inisialisasi halaman
+        document.addEventListener('DOMContentLoaded', async () => {
+            const productId = getProductIdFromURL();
+            
+            updateCartCounter();
+            
+            const addToCartBtn = document.getElementById('addToCartBtn');
+            if (addToCartBtn) {
+                addToCartBtn.addEventListener('click', addToCart);
+            }
+            
+            // Inisialisasi metode pembayaran
+            selectPayment(selectedPayment);
+            
+            if (!productId) {
+                showError('ID produk tidak ditemukan di URL.');
+                return;
+            }
+            
+            try {
+                currentProduct = await fetchProduct(productId);
+                renderProduct(currentProduct);
+                
+                // Coba pulihkan data setelah produk dirender
+                setTimeout(() => {
+                    restoreProductData();
+                }, 100);
+                
+                document.getElementById('loading-container').style.display = 'none';
+                document.getElementById('checkout-container').style.display = 'grid';
+            } catch (error) {
+                console.error('Error loading product:', error);
+                showError(error.message || 'Terjadi kesalahan saat memuat produk.');
+            }
+        });
+
+        // Fungsi untuk menampilkan error
+        function showError(message) {
+            document.getElementById('loading-container').style.display = 'none';
+            document.getElementById('error-container').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>

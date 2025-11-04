@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/product.css">
+</head>
+<body>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="mobile-logo">Digital Creative</div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-palette"></i>
+            </div>
+            <h1>Digital Creative</h1>
+        </div>
+        
+        <div class="nav-menu">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-th-large"></i><span>Dashboard</span>
+            </a>
+            <a href="product.html" class="nav-item active">
+                <i class="fas fa-box"></i><span>Produk</span>
+            </a>
+            <a href="keranjang.html" class="nav-item">
+                <i class="fas fa-shopping-cart"></i><span>Keranjang</span>
+            </a>
+            <a href="testi.html" class="nav-item">
+                <i class="fas fa-comment-dots"></i><span>Testimoni</span>
+            </a>
+            <a href="komunitas.html" class="nav-item">
+                <i class="fas fa-users"></i><span>Komunitas</span>
+            </a>
+            
+            <!-- PERBAIKAN: Dropdown Menu for Tools -->
+            <div class="nav-dropdown" id="toolsDropdown">
+                <div class="dropdown-toggle">
+                    <div>
+                        <i class="fas fa-toolbox"></i><span> Tools</span>
+                    </div>
+                    <i class="fas fa-chevron-down dropdown-arrow"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="convert-v2ray.html" class="dropdown-item">
+                        <i class="fas fa-exchange-alt"></i><span>Convert v2ray to OpenWRT</span>
+                    </a>
+                    <!-- Contoh item tambahan untuk menunjukkan struktur -->
+                    <a href="other-tool.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i><span>Other Tool</span>
+                    </a>
+                </div>
+            </div>
+            
+            <a href="help-center.html" class="nav-item">
+                <i class="fas fa-question-circle"></i><span>Help Center</span>
+            </a>
+        </div>
+        
+        <div class="theme-toggle">
+            <div class="mode-indicator" id="modeIndicator">
+                <i class="fas fa-moon icon"></i>
+                <span class="text">Dark Mode</span>
+            </div>
+            <div class="toggle-switch" id="themeToggle">
+                <i class="fas fa-sun toggle-icon sun"></i>
+                <i class="fas fa-moon toggle-icon moon"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="header">
+                <div class="page-title">
+                    <h1>Katalog Produk</h1>
+                    <p>Temukan produk digital terbaik pilihanmu.</p>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Cari produk...">
+                    </div>
+                    <button class="btn" id="filterBtn">
+                        <i class="fas fa-filter"></i>
+                        Filter
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Category Filter -->
+            <div class="category-filter" id="categoryFilter">
+                <button class="category-btn active" data-category="all">Semua</button>
+                <button class="category-btn" data-category="config">Config</button>
+                <button class="category-btn" data-category="vpn">VPN</button>
+                <button class="category-btn" data-category="server">Server</button>
+                <button class="category-btn" data-category="paket">Paket</button>
+                <button class="category-btn" data-category="panel">Panel</button>
+            </div>
+            
+            <!-- Banner Slider - PERBAIKAN TATA LETAK -->
+            <div class="banner-slider-section">
+                <div class="banner-slider">
+                    <div class="slider-track">
+                        <!-- Slide 1 -->
+                        <div class="slide">
+                            <div class="slide-content">
+                                <div class="slide-text">
+                                    <h2>🔥 Produk Terlaris Minggu Ini</h2>
+                                    <p><strong>Smart Watch Fitness Tracker</strong> Diskon 40%!</p>
+                                </div>
+                                <div class="slide-image">
+                                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Smart Watch">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 2 -->
+                        <div class="slide">
+                            <div class="slide-content">
+                                <div class="slide-text">
+                                    <h2>⭐ Best Seller</h2>
+                                    <p><strong>Wireless Headphones Premium Edition</strong> – Hemat 25%!</p>
+                                </div>
+                                <div class="slide-image">
+                                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Wireless Headphones">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 3 -->
+                        <div class="slide">
+                            <div class="slide-content">
+                                <div class="slide-text">
+                                    <h2>💎 Limited Edition</h2>
+                                    <p><strong>Gaming Laptop Pro Series</strong> – Potongan Rp 3 Juta!</p>
+                                </div>
+                                <div class="slide-image">
+                                    <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Gaming Laptop">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Cards - SHOPEE STYLE -->
+            <div class="products-section">
+                <div class="section-header">
+                    <div class="section-title">Product Catalog</div>
+                    <button class="btn" id="refreshBtn">
+                        <i class="fas fa-sync-alt"></i>
+                        Refresh
+                    </button>
+                </div>
+                
+                <!-- Loading State -->
+                <div class="loading-state" id="loadingState">
+                    <div class="loading-spinner"></div>
+                    <p>Memuat produk...</p>
+                </div>
+                
+                <!-- Error State -->
+                <div class="error-state" id="errorState" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Gagal memuat produk</h3>
+                    <p>Terjadi kesalahan saat mengambil data produk. Silakan coba lagi.</p>
+                    <button class="retry-btn" id="retryBtn">Coba Lagi</button>
+                </div>
+                
+                <!-- Products Grid -->
+                <div class="products-grid" id="productsGrid">
+                    <!-- Produk akan ditampilkan di sini secara dinamis -->
+                </div>
+            </div>
+            
+            <!-- About Section -->
+            <div class="about-section">
+                <p>"Kami menyediakan berbagai produk digital berkualitas untuk membantu desainer, marketer, dan kreator membangun karya mereka lebih cepat."</p>
+            </div>
+        </div>
+        
+        <!-- Footer yang Diperbaiki -->
+        <div class="footer">
+            <div class="footer-store">Snayders Store v0.01</div>
+            <div class="footer-contact">
+                <a href="mailto:snaydersstore@gmail.com" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://wa.me/6281234567890" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://facebook.com/snaydersstore" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://t.me/snaydersstore" target="_blank" title="Telegram">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 Snayders Store. All rights reserved.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // API Configuration
+        const API_BASE_URL = 'https://web3-olshop.vercel.app/api'; // Ganti dengan URL API Vercel Anda
+        
+        // State management
+        let allProducts = [];
+        let filteredProducts = [];
+        let currentCategory = 'all';
+        let searchQuery = '';
+        let isFilterActive = false;
+
+        // DOM Elements
+        const productsGrid = document.getElementById('productsGrid');
+        const loadingState = document.getElementById('loadingState');
+        const errorState = document.getElementById('errorState');
+        const searchInput = document.getElementById('searchInput');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const retryBtn = document.getElementById('retryBtn');
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const filterBtn = document.getElementById('filterBtn');
+        const categoryFilter = document.getElementById('categoryFilter');
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('mobile-visible');
+        });
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (event) => {
+            if (window.innerWidth <= 768) {
+                if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                    sidebar.classList.remove('mobile-visible');
+                }
+            }
+        });
+
+        // Swipe to close sidebar on mobile
+        let startX = 0;
+        let currentX = 0;
+        let sidebarVisible = false;
+
+        document.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            sidebarVisible = sidebar.classList.contains('mobile-visible');
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (window.innerWidth <= 768 && sidebarVisible) {
+                currentX = e.touches[0].clientX;
+                let diff = startX - currentX;
+                // Jika swipe ke kiri lebih dari 50px, tutup sidebar
+                if (diff > 50) {
+                    sidebar.classList.remove('mobile-visible');
+                }
+            }
+        });
+
+        // Swipe to open sidebar on mobile (from left edge)
+        document.addEventListener('touchstart', (e) => {
+            if (window.innerWidth <= 768 && !sidebarVisible) {
+                startX = e.touches[0].clientX;
+                // Jika sentuhan dimulai dari area 20px dari kiri
+                if (startX <= 20) {
+                    sidebarVisible = true;
+                }
+            }
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (window.innerWidth <= 768 && !sidebar.classList.contains('mobile-visible') && sidebarVisible) {
+                currentX = e.touches[0].clientX;
+                let diff = currentX - startX;
+                // Jika swipe ke kanan lebih dari 50px, buka sidebar
+                if (diff > 50) {
+                    sidebar.classList.add('mobile-visible');
+                }
+            }
+        });
+
+        // Dark/Light mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const modeIndicator = document.getElementById('modeIndicator');
+        const modeIcon = modeIndicator.querySelector('.icon');
+        const modeText = modeIndicator.querySelector('.text');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to dark
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            body.classList.add('light-mode');
+            modeText.textContent = 'Light Mode';
+            modeIcon.className = 'fas fa-sun icon';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            // Update the mode indicator
+            if (body.classList.contains('light-mode')) {
+                modeText.textContent = 'Light Mode';
+                modeIcon.className = 'fas fa-sun icon';
+            } else {
+                modeText.textContent = 'Dark Mode';
+                modeIcon.className = 'fas fa-moon icon';
+            }
+            
+            // Save the current theme to localStorage
+            const theme = body.classList.contains('light-mode') ? 'light' : 'dark';
+            localStorage.setItem('theme', theme);
+        });
+
+        // PERBAIKAN: Tools dropdown functionality
+        const toolsDropdown = document.getElementById('toolsDropdown');
+        
+        toolsDropdown.addEventListener('click', (e) => {
+            // Mencegah event bubbling agar tidak tertutup saat mengklik dropdown
+            e.stopPropagation();
+            toolsDropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!toolsDropdown.contains(event.target)) {
+                toolsDropdown.classList.remove('active');
+            }
+        });
+
+        // Fetch products from API
+        async function fetchProducts() {
+            try {
+                showLoading();
+                
+                const response = await fetch(`${API_BASE_URL}/products`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const products = await response.json();
+                allProducts = products;
+                
+                // Apply initial filters
+                applyFilters();
+                
+                hideLoading();
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                showError();
+            }
+        }
+
+        // Show loading state
+        function showLoading() {
+            loadingState.style.display = 'flex';
+            errorState.style.display = 'none';
+            productsGrid.style.display = 'none';
+        }
+
+        // Hide loading state
+        function hideLoading() {
+            loadingState.style.display = 'none';
+            errorState.style.display = 'none';
+            productsGrid.style.display = 'grid';
+        }
+
+        // Show error state
+        function showError() {
+            loadingState.style.display = 'none';
+            errorState.style.display = 'flex';
+            productsGrid.style.display = 'none';
+        }
+
+        // Format currency to Indonesian Rupiah
+        function formatRupiah(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Calculate discount percentage
+        function calculateDiscountPercentage(originalPrice, discountPrice) {
+            if (originalPrice <= discountPrice || originalPrice === 0) {
+                return 0;
+            }
+            
+            return Math.floor(((originalPrice - discountPrice) / originalPrice) * 100);
+        }
+
+        // PERBAIKAN: Fungsi rating baru - hanya menampilkan satu bintang dengan angka
+        function generateStarRating(rating) {
+            // Format angka rating sesuai kebutuhan
+            let formattedRating;
+            if (Number.isInteger(rating)) {
+                formattedRating = rating.toString(); // Angka bulat tanpa desimal
+            } else {
+                formattedRating = rating.toFixed(1); // Angka desimal dengan 1 digit
+            }
+            
+            // Kembalikan HTML untuk satu bintang dengan angka rating
+            return `
+                <span class="rating-stars">
+                    <i class="fas fa-star"></i>
+                </span>
+                <span class="rating-value">${formattedRating}</span>
+            `;
+        }
+
+        // Format sold count
+        function formatSoldCount(count) {
+            if (count >= 1000) {
+                return `Terjual ${(count / 1000).toFixed(1)}k`;
+            }
+            return `Terjual ${count}`;
+        }
+
+        // Render products to the grid
+        function renderProducts(products) {
+            productsGrid.innerHTML = '';
+            
+            if (products.length === 0) {
+                productsGrid.innerHTML = `
+                    <div class="error-state" style="display: flex; grid-column: 1 / -1;">
+                        <i class="fas fa-search"></i>
+                        <h3>Tidak ada produk ditemukan</h3>
+                        <p>Coba ubah filter atau kata kunci pencarian.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            products.forEach(product => {
+                // Use first variant for pricing
+                const firstVariant = product.varian && product.varian.length > 0 ? product.varian[0] : null;
+                
+                if (!firstVariant) {
+                    console.warn('Product has no variants:', product);
+                    return;
+                }
+                
+                const originalPrice = firstVariant.harga_asli;
+                const discountPrice = firstVariant.harga_diskon;
+                const discountPercentage = calculateDiscountPercentage(originalPrice, discountPrice);
+                
+                // Create product card
+                const productCard = document.createElement('a');
+                productCard.href = `product-dg.html?id=${product.id}`;
+                productCard.className = 'product-card';
+                
+                // Product image
+                const productImage = product.gambar 
+                    ? `<img src="${product.gambar}" alt="${product.nama}">`
+                    : `<i class="fas fa-box"></i>`;
+                
+                // Stock badge
+                let stockBadge = '';
+                if (product.stok === 'in-stock') {
+                    stockBadge = '<div class="product-badge in-stock">In Stock</div>';
+                } else if (product.stok === 'low-stock') {
+                    stockBadge = '<div class="product-badge low-stock">Low Stock</div>';
+                } else if (product.stok === 'out-of-stock') {
+                    stockBadge = '<div class="product-badge out-of-stock">Out of Stock</div>';
+                }
+                
+                // Discount badge (only show if there's a discount)
+                const discountBadge = discountPercentage > 0 
+                    ? `<div class="discount-badge">-${discountPercentage}%</div>`
+                    : '';
+                
+                // PERBAIKAN: Star rating baru - hanya satu bintang dengan angka
+                const starRating = generateStarRating(product.rating || 0);
+                
+                // Sold count
+                const soldCount = formatSoldCount(product.terjual || 0);
+                
+                // PERBAIKAN: Tata letak harga dan voucher yang lebih seimbang
+                const hasDiscount = discountPercentage > 0;
+                const voucherIcon = hasDiscount ? `<img src="https://raw.githubusercontent.com/klandestin-s/Cloud_v2/main/tmp/cd242d85.jpg" alt="Voucher Diskon" class="voucher-icon">` : "";
+                const newPrice = `
+                    <div class="price-container">
+                        <span class="new-price">${formatRupiah(discountPrice)}</span>
+                        ${voucherIcon}
+                    </div>
+                `;
+                
+                // Build product card HTML
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        ${productImage}
+                        ${stockBadge}
+                        ${discountBadge}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${product.nama}</div>
+                        <div class="product-rating">
+                            ${starRating}
+                            <span class="sold-count">${soldCount}</span>
+                        </div>
+                        <div class="product-prices">
+                            ${newPrice}
+                        </div>
+                    </div>
+                `;
+                
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        // Apply filters based on current category and search query
+        function applyFilters() {
+            filteredProducts = [...allProducts];
+            
+            // Apply category filter - PERBAIKAN: Kategori "all" tidak mencari kata kunci
+            if (currentCategory !== 'all') {
+                filteredProducts = filteredProducts.filter(product => {
+                    // Cari produk yang mengandung kata kategori di nama atau deskripsi
+                    const searchText = (product.nama + ' ' + (product.deskripsi_singkat || '')).toLowerCase();
+                    return searchText.includes(currentCategory.toLowerCase());
+                });
+            }
+            
+            // Apply search filter
+            if (searchQuery.trim() !== '') {
+                const query = searchQuery.toLowerCase();
+                filteredProducts = filteredProducts.filter(product => 
+                    product.nama.toLowerCase().includes(query) ||
+                    (product.deskripsi_singkat && product.deskripsi_singkat.toLowerCase().includes(query))
+                );
+            }
+            
+            // Render filtered products
+            renderProducts(filteredProducts);
+        }
+
+        // Toggle filter visibility
+        function toggleFilterVisibility() {
+            isFilterActive = !isFilterActive;
+            
+            if (isFilterActive) {
+                categoryFilter.classList.add('filter-active');
+                filterBtn.innerHTML = '<i class="fas fa-times"></i> Tutup Filter';
+            } else {
+                categoryFilter.classList.remove('filter-active');
+                filterBtn.innerHTML = '<i class="fas fa-filter"></i> Filter';
+            }
+        }
+
+        // Event listeners for category filter
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Update current category
+                currentCategory = button.getAttribute('data-category');
+                
+                // Apply filters
+                applyFilters();
+                
+                // Hide filter buttons after selection (optional)
+                if (window.innerWidth <= 768) {
+                    toggleFilterVisibility();
+                }
+            });
+        });
+
+        // Event listener for search input
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            applyFilters();
+        });
+
+        // Event listener for refresh button dengan animasi berputar
+refreshBtn.addEventListener('click', () => {
+    const icon = refreshBtn.querySelector('i');
+    icon.classList.add('rotate'); // mulai animasi
+
+    // jalankan fungsi ambil data
+    fetchProducts().finally(() => {
+        // hentikan animasi setelah data dimuat (2 detik biar halus)
+        setTimeout(() => icon.classList.remove('rotate'), 2000);
+    });
+});
+
+        // Event listener for retry button
+        retryBtn.addEventListener('click', () => {
+            fetchProducts();
+        });
+
+        // Event listener for filter button
+        filterBtn.addEventListener('click', () => {
+            toggleFilterVisibility();
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchProducts();
+        });
+    </script>
+</body>
+</html>

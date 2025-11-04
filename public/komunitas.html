@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komunitas Digital - Digital Creative</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/community.css">
+</head>
+<body>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="mobile-logo">Digital Creative</div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-palette"></i>
+            </div>
+            <h1>Digital Creative</h1>
+        </div>
+        
+        <div class="nav-menu">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-th-large"></i><span>Dashboard</span>
+            </a>
+            <a href="product.html" class="nav-item">
+                <i class="fas fa-box"></i><span>Produk</span>
+            </a>
+            <a href="keranjang.html" class="nav-item">
+                <i class="fas fa-shopping-cart"></i><span>Keranjang</span>
+            </a>
+            <a href="testi.html" class="nav-item">
+                <i class="fas fa-comment-dots"></i><span>Testimoni</span>
+            </a>
+            <a href="komunitas.html" class="nav-item active">
+                <i class="fas fa-users"></i><span>Komunitas</span>
+            </a>
+            
+            <!-- PERBAIKAN: Dropdown Menu for Tools -->
+            <div class="nav-dropdown" id="toolsDropdown">
+                <div class="dropdown-toggle">
+                    <div>
+                        <i class="fas fa-toolbox"></i><span> Tools</span>
+                    </div>
+                    <i class="fas fa-chevron-down dropdown-arrow"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="convert-v2ray.html" class="dropdown-item">
+                        <i class="fas fa-exchange-alt"></i><span>Convert v2ray to OpenWRT</span>
+                    </a>
+                    <!-- Contoh item tambahan untuk menunjukkan struktur -->
+                    <a href="other-tool.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i><span>Other Tool</span>
+                    </a>
+                </div>
+            </div>
+            
+            <a href="help-center.html" class="nav-item">
+                <i class="fas fa-question-circle"></i><span>Help Center</span>
+            </a>
+        </div>
+        
+        <div class="theme-toggle">
+            <div class="mode-indicator" id="modeIndicator">
+                <i class="fas fa-moon icon"></i>
+                <span class="text">Dark Mode</span>
+            </div>
+            <div class="toggle-switch" id="themeToggle">
+                <i class="fas fa-sun toggle-icon sun"></i>
+                <i class="fas fa-moon toggle-icon moon"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="header">
+                <div class="page-title">
+                    <h1>Komunitas Digital</h1>
+                    <p>Tempat berkumpulnya para pengguna dan kreator digital untuk saling berbagi, belajar, dan berkolaborasi.</p>
+                </div>
+            </div>
+            
+            <!-- WhatsApp Groups Section -->
+            <div class="section">
+                <div class="section-header">
+                    <div>
+                        <div class="section-title">Grup WhatsApp Komunitas</div>
+                        <div class="section-subtitle">Bergabung dengan grup diskusi berdasarkan minat Anda</div>
+                    </div>
+                </div>
+                
+                <div class="groups-grid">
+                    <!-- Group 1 -->
+                    <div class="group-card">
+                        <div class="group-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="group-name">Komunitas Belajar Digital</div>
+                        <div class="group-description">Diskusi seputar digital product, UI/UX, dan pengembangan teknologi. Tempat berbagi pengetahuan dan pengalaman dalam industri digital.</div>
+                        <button class="btn btn-success">
+                            <i class="fab fa-whatsapp"></i>
+                            Gabung Grup WhatsApp 1
+                        </button>
+                    </div>
+                    
+                    <!-- Group 2 -->
+                    <div class="group-card">
+                        <div class="group-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="group-name">Komunitas Kreator & Bisnis Online</div>
+                        <div class="group-description">Tempat berbagi strategi bisnis, desain, dan pemasaran digital. Kolaborasi dengan sesama kreator dan pengusaha online.</div>
+                        <button class="btn btn-success">
+                            <i class="fab fa-whatsapp"></i>
+                            Gabung Grup WhatsApp 2
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- WhatsApp Channel Section -->
+            <div class="section">
+                <div class="channel-card whatsapp-channel">
+                    <div class="channel-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="channel-content">
+                        <div class="channel-title">Saluran Informasi WhatsApp</div>
+                        <div class="channel-description">Dapatkan update, tips, dan berita terbaru seputar komunitas digital langsung di WhatsApp Anda. Tidak ada obrolan, hanya informasi penting.</div>
+                        <button class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            Ikuti Saluran WA
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Telegram Channel Section -->
+            <div class="section">
+                <div class="channel-card telegram-channel">
+                    <div class="channel-icon">
+                        <i class="fab fa-telegram"></i>
+                    </div>
+                    <div class="channel-content">
+                        <div class="channel-title">Saluran Informasi Telegram</div>
+                        <div class="channel-description">Ikuti update, berita, dan pengumuman komunitas digital langsung melalui Telegram Channel kami.</div>
+                        <button class="btn btn-telegram">
+                            <i class="fab fa-telegram"></i>
+                            Ikuti Saluran Telegram
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hubungi Admin Section - STYLE KHUSUS -->
+            <div class="contact-admin-section">
+                <div class="contact-admin-header">
+                    <div class="contact-admin-title">Hubungi Admin</div>
+                    <div class="contact-admin-subtitle">Butuh bantuan atau informasi lebih lanjut? Tim admin kami siap membantu Anda melalui berbagai platform berikut</div>
+                </div>
+                
+                <div class="contact-admin-divider"></div>
+                
+                <div class="contact-admin-grid">
+                    <!-- WhatsApp Admin -->
+                    <a href="https://wa.me/6281234567890" target="_blank" class="contact-card contact-whatsapp">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-platform">WhatsApp</div>
+                        <div class="contact-description">Chat langsung dengan admin via WhatsApp untuk respon cepat</div>
+                        <div class="contact-btn">Hubungi Sekarang</div>
+                    </a>
+                    
+                    <!-- Telegram Admin -->
+                    <a href="https://t.me/snaydersstore" target="_blank" class="contact-card contact-telegram">
+                        <div class="contact-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="contact-platform">Telegram</div>
+                        <div class="contact-description">Kirim pesan ke admin melalui Telegram untuk bantuan teknis</div>
+                        <div class="contact-btn">Hubungi Sekarang</div>
+                    </a>
+                    
+                    <!-- Facebook Admin -->
+                    <a href="https://facebook.com/snaydersstore" target="_blank" class="contact-card contact-facebook">
+                        <div class="contact-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <div class="contact-platform">Facebook</div>
+                        <div class="contact-description">Hubungi admin melalui Facebook Messenger untuk konsultasi</div>
+                        <div class="contact-btn">Hubungi Sekarang</div>
+                    </a>
+                    
+                    <!-- Email Admin -->
+                    <a href="mailto:snaydersstore@gmail.com" class="contact-card contact-email">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-platform">Email</div>
+                        <div class="contact-description">Kirim email ke admin untuk pertanyaan detail dan kompleks</div>
+                        <div class="contact-btn">Hubungi Sekarang</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer yang Diperbaiki -->
+        <div class="footer">
+            <div class="footer-store">Snayders Store v0.01</div>
+            <div class="footer-contact">
+                <a href="mailto:snaydersstore@gmail.com" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://wa.me/6281234567890" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://facebook.com/snaydersstore" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://t.me/snaydersstore" target="_blank" title="Telegram">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 Snayders Store. All rights reserved.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('mobile-visible');
+        });
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (event) => {
+            if (window.innerWidth <= 768) {
+                if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                    sidebar.classList.remove('mobile-visible');
+                }
+            }
+        });
+
+        // Swipe to close sidebar on mobile
+        let startX = 0;
+        let currentX = 0;
+        let sidebarVisible = false;
+
+        document.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            sidebarVisible = sidebar.classList.contains('mobile-visible');
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (window.innerWidth <= 768 && sidebarVisible) {
+                currentX = e.touches[0].clientX;
+                let diff = startX - currentX;
+                // Jika swipe ke kiri lebih dari 50px, tutup sidebar
+                if (diff > 50) {
+                    sidebar.classList.remove('mobile-visible');
+                }
+            }
+        });
+
+        // Swipe to open sidebar on mobile (from left edge)
+        document.addEventListener('touchstart', (e) => {
+            if (window.innerWidth <= 768 && !sidebarVisible) {
+                startX = e.touches[0].clientX;
+                // Jika sentuhan dimulai dari area 20px dari kiri
+                if (startX <= 20) {
+                    sidebarVisible = true;
+                }
+            }
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (window.innerWidth <= 768 && !sidebar.classList.contains('mobile-visible') && sidebarVisible) {
+                currentX = e.touches[0].clientX;
+                let diff = currentX - startX;
+                // Jika swipe ke kanan lebih dari 50px, buka sidebar
+                if (diff > 50) {
+                    sidebar.classList.add('mobile-visible');
+                }
+            }
+        });
+
+        // Dark/Light mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const modeIndicator = document.getElementById('modeIndicator');
+        const modeIcon = modeIndicator.querySelector('.icon');
+        const modeText = modeIndicator.querySelector('.text');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to dark
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            body.classList.add('light-mode');
+            modeText.textContent = 'Light Mode';
+            modeIcon.className = 'fas fa-sun icon';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            // Update the mode indicator
+            if (body.classList.contains('light-mode')) {
+                modeText.textContent = 'Light Mode';
+                modeIcon.className = 'fas fa-sun icon';
+            } else {
+                modeText.textContent = 'Dark Mode';
+                modeIcon.className = 'fas fa-moon icon';
+            }
+            
+            // Save the current theme to localStorage
+            const theme = body.classList.contains('light-mode') ? 'light' : 'dark';
+            localStorage.setItem('theme', theme);
+        });
+
+        // PERBAIKAN: Tools dropdown functionality
+        const toolsDropdown = document.getElementById('toolsDropdown');
+        
+        toolsDropdown.addEventListener('click', (e) => {
+            // Mencegah event bubbling agar tidak tertutup saat mengklik dropdown
+            e.stopPropagation();
+            toolsDropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!toolsDropdown.contains(event.target)) {
+                toolsDropdown.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

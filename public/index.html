@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snayders</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="mobile-logo">Snayders store</div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-palette"></i>
+            </div>
+            <h1>Digital Products</h1>
+        </div>
+        
+        <div class="nav-menu">
+            <a href="index.html" class="nav-item active">
+                <i class="fas fa-th-large"></i><span>Dashboard</span>
+            </a>
+            <a href="product.html" class="nav-item">
+                <i class="fas fa-box"></i><span>Produk</span>
+            </a>
+            <a href="keranjang.html" class="nav-item">
+                <i class="fas fa-shopping-cart"></i><span>Keranjang</span>
+            </a>
+            <a href="testi.html" class="nav-item">
+                <i class="fas fa-comment-dots"></i><span>Testimoni</span>
+            </a>
+            <a href="komunitas.html" class="nav-item">
+                <i class="fas fa-users"></i><span>Komunitas</span>
+            </a>
+            
+            <!-- PERBAIKAN: Dropdown Menu for Tools -->
+            <div class="nav-dropdown" id="toolsDropdown">
+                <div class="dropdown-toggle">
+                    <div>
+                        <i class="fas fa-toolbox"></i><span> Tools</span>
+                    </div>
+                    <i class="fas fa-chevron-down dropdown-arrow"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="convert-v2ray.html" class="dropdown-item">
+                        <i class="fas fa-exchange-alt"></i><span>Convert v2ray to OpenWRT</span>
+                    </a>
+                    <!-- Contoh item tambahan untuk menunjukkan struktur -->
+                    <a href="other-tool.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i><span>Other Tool</span>
+                    </a>
+                </div>
+            </div>
+            
+            <a href="help-center.html" class="nav-item">
+                <i class="fas fa-question-circle"></i><span>Help Center</span>
+            </a>
+        </div>
+        
+        <div class="theme-toggle">
+            <div class="mode-indicator" id="modeIndicator">
+                <i class="fas fa-moon icon"></i>
+                <span class="text">Dark Mode</span>
+            </div>
+            <div class="toggle-switch" id="themeToggle">
+                <i class="fas fa-sun toggle-icon sun"></i>
+                <i class="fas fa-moon toggle-icon moon"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="header">
+                <div class="page-title">
+                    <h1>Dashboard</h1>
+                    <p>Selamat datang di Digital Product Dashboard</p>
+                </div>
+                <!-- Hapus header-actions (search dan filter) -->
+            </div>
+            
+            <!-- Banner Slider - PERBAIKAN TATA LETAK -->
+            <div class="banner-slider-section">
+                <div class="banner-slider">
+                    <div class="slider-track">
+                        <!-- Slide 1 -->
+                        <div class="slide">
+                            <div class="slide-content">
+                                <div class="slide-text">
+                                    <h2>🚀 Produk Digital Terbaru</h2>
+                                    <p><strong>Temukan produk yang kamu inginkan disini</strong> untuk meningkatkan produktivitas Anda!</p>
+                                </div>
+                                <div class="slide-image">
+                                    <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Software Mockup">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 2 -->
+                        <div class="slide">
+                            <div class="slide-content">
+                                <div class="slide-text">
+                                    <h2>⚡ Server Dedicated Premium Cepat & Aman</h2>
+                                    <p><strong>Infrastruktur kelas enterprise</strong> untuk performa maksimal dan keamanan terjamin.</p>
+                                </div>
+                                <div class="slide-image">
+                                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Server Illustration">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 3 -->
+                        <div class="slide">
+                            <div class="slide-content">
+                                <div class="slide-text">
+                                    <h2>💬 Komunitas Kreatif</h2>
+                                    <p><strong>Bergabung dengan komunitas</strong> untuk berbagi ide dan membantu sesama.</p>
+                                </div>
+                                <div class="slide-image">
+                                    <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Team Collaboration">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Features Section -->
+            <div class="features-section">
+                <h2 class="section-title">Layanan Utama</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <h3 class="feature-title">Produk Digital</h3>
+                        <p class="feature-desc">Koleksi produk digital inovatif dan berkualitas tinggi.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <h3 class="feature-title">Testimoni</h3>
+                        <p class="feature-desc">Bukti nyata dari pelanggan yang puas.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <h3 class="feature-title">Config Gratis</h3>
+                        <p class="feature-desc">File konfigurasi yang bisa diunduh tanpa biaya.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="feature-title">Komunitas</h3>
+                        <p class="feature-desc">Bergabung dengan komunitas pengguna kami.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3 class="feature-title">Server Premium</h3>
+                        <p class="feature-desc">Server cepat dan stabil untuk performa maksimal.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="feature-title">Rating 4,9/5</h3>
+                        <p class="feature-desc">Dipercaya ribuan pelanggan dengan kepuasan tinggi.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts Section - PERBAIKAN UTAMA -->
+            <div class="charts-section">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title">Distribusi Produk di Website</div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="donut-chart">
+                            <div class="donut"></div>
+                            <div class="donut-center">
+                                <div class="donut-center-value">100%<br>Produk Aktif</div>
+                            </div>
+                        </div>
+                        <!-- PERBAIKAN: Legenda dengan 2 kolom di samping grafik -->
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #4F46E5;"></div>
+                                <span>Config (40%)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #10B981;"></div>
+                                <span>VPN (25%)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #8B5CF6;"></div>
+                                <span>Server (20%)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #FF6B9C;"></div>
+                                <span>Lainnya (15%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h2>Bergabung dengan Komunitas Kami</h2>
+                <p>Terhubung dengan kreator lain, diskusikan ide, dan kembangkan produk digital Anda bersama kami.</p>
+                <div class="cta-actions">
+                    <a href="komunitas.html" class="btn btn-primary">Komunitas</a>
+                    <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-secondary">Hubungi Kami</a>
+                </div>
+            </div>
+            
+            <!-- About Section -->
+            <div class="about-section">
+                <p>"Kami menyediakan berbagai produk digital berkualitas untuk membantu desainer, marketer, dan kreator membangun karya mereka lebih cepat."</p>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-store">Snayders Store v0.01</div>
+            <div class="footer-contact">
+                <a href="mailto:snaydersstore@gmail.com" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://wa.me/6281234567890" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://facebook.com/snaydersstore" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://t.me/snaydersstore" target="_blank" title="Telegram">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 Snayders Store. All rights reserved.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('mobile-visible');
+        });
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (event) => {
+            if (window.innerWidth <= 768) {
+                if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                    sidebar.classList.remove('mobile-visible');
+                }
+            }
+        });
+
+        // Swipe to close sidebar on mobile
+        let startX = 0;
+        let currentX = 0;
+        let sidebarVisible = false;
+
+        document.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            sidebarVisible = sidebar.classList.contains('mobile-visible');
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (window.innerWidth <= 768 && sidebarVisible) {
+                currentX = e.touches[0].clientX;
+                let diff = startX - currentX;
+                // Jika swipe ke kiri lebih dari 50px, tutup sidebar
+                if (diff > 50) {
+                    sidebar.classList.remove('mobile-visible');
+                }
+            }
+        });
+
+        // Swipe to open sidebar on mobile (from left edge)
+        document.addEventListener('touchstart', (e) => {
+            if (window.innerWidth <= 768 && !sidebarVisible) {
+                startX = e.touches[0].clientX;
+                // Jika sentuhan dimulai dari area 20px dari kiri
+                if (startX <= 20) {
+                    sidebarVisible = true;
+                }
+            }
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (window.innerWidth <= 768 && !sidebar.classList.contains('mobile-visible') && sidebarVisible) {
+                currentX = e.touches[0].clientX;
+                let diff = currentX - startX;
+                // Jika swipe ke kanan lebih dari 50px, buka sidebar
+                if (diff > 50) {
+                    sidebar.classList.add('mobile-visible');
+                }
+            }
+        });
+
+        // Dark/Light mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const modeIndicator = document.getElementById('modeIndicator');
+        const modeIcon = modeIndicator.querySelector('.icon');
+        const modeText = modeIndicator.querySelector('.text');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to dark
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            body.classList.add('light-mode');
+            modeText.textContent = 'Light Mode';
+            modeIcon.className = 'fas fa-sun icon';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            // Update the mode indicator
+            if (body.classList.contains('light-mode')) {
+                modeText.textContent = 'Light Mode';
+                modeIcon.className = 'fas fa-sun icon';
+            } else {
+                modeText.textContent = 'Dark Mode';
+                modeIcon.className = 'fas fa-moon icon';
+            }
+            
+            // Save the current theme to localStorage
+            const theme = body.classList.contains('light-mode') ? 'light' : 'dark';
+            localStorage.setItem('theme', theme);
+        });
+
+        // PERBAIKAN: Tools dropdown functionality
+        const toolsDropdown = document.getElementById('toolsDropdown');
+        
+        toolsDropdown.addEventListener('click', (e) => {
+            // Mencegah event bubbling agar tidak tertutup saat mengklik dropdown
+            e.stopPropagation();
+            toolsDropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!toolsDropdown.contains(event.target)) {
+                toolsDropdown.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

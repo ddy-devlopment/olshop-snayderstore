@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang - ProductDash</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link rel="stylesheet" href="css/keranjang.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="cart-header">
+        <div class="header-left">
+            <button class="back-btn" onclick="window.history.back()">
+                <i class="fas fa-arrow-left"></i>
+                <span>Kembali</span>
+            </button>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <h1>ProductDash</h1>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="delete-selected-btn" id="deleteSelectedBtn" onclick="showDeleteSelectedModal()" disabled>
+                <i class="fas fa-trash"></i>
+            </button>
+            <div class="cart-icon" onclick="goToCart()" style="position: relative;">
+                <i class="fas fa-shopping-cart"></i>
+                <div class="cart-counter" id="cartCounter" style="display: none;">0</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="cart-container">
+        <!-- Empty Cart State (initially hidden) -->
+        <div class="empty-cart" id="emptyCart">
+            <div class="empty-cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h2 class="empty-cart-title">Keranjangmu masih kosong!</h2>
+            <p class="empty-cart-desc">Tambahkan produk ke keranjang untuk melanjutkan belanja.</p>
+            <button class="home-btn" onclick="goToHome()">
+                <i class="fas fa-home"></i>
+                Kembali ke Beranda
+            </button>
+        </div>
+
+        <!-- Cart with Items (initially shown) -->
+        <div class="cart-content" id="cartContent">
+            <div class="cart-items-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-box"></i>
+                        Produk di Keranjang
+                    </h2>
+                </div>
+                
+                <div class="cart-items" id="cartItems">
+                    <!-- Cart items will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <div class="cart-summary">
+                <h2 class="summary-title">
+                    <i class="fas fa-receipt"></i>
+                    Ringkasan Belanja
+                </h2>
+                
+                <div class="summary-row">
+                    <span class="summary-label">Subtotal</span>
+                    <span class="summary-value" id="subtotal">Rp 0</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span class="summary-label">Diskon</span>
+                    <span class="summary-value" id="discount">-Rp 0</span>
+                </div>
+                
+                <div class="summary-divider"></div>
+                
+                <div class="total-row">
+                    <span class="total-label">Total Bayar</span>
+                    <span class="total-value" id="total">Rp 0</span>
+                </div>
+                
+                <button class="checkout-btn" id="checkoutBtn" onclick="goToCheckout()" disabled>
+                    <i class="fab fa-whatsapp"></i>
+                    Checkout via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="notification-text" id="notificationText">Item berhasil dihapus!</div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal-overlay" id="deleteSelectedModal">
+        <div class="modal">
+            <h3 class="modal-title">Hapus Produk Terpilih</h3>
+            <p class="modal-text">Apakah Anda yakin ingin menghapus semua produk yang dipilih dari keranjang?</p>
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="hideDeleteSelectedModal()">Batal</button>
+                <button class="modal-btn confirm" onclick="deleteSelectedItems()">Ya, Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data keranjang dari localStorage
+        let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // DOM Elements
+        const emptyCartEl = document.getElementById('emptyCart');
+        const cartContentEl = document.getElementById('cartContent');
+        const cartItemsEl = document.getElementById('cartItems');
+        const subtotalEl = document.getElementById('subtotal');
+        const discountEl = document.getElementById('discount');
+        const totalEl = document.getElementById('total');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
+        const notificationEl = document.getElementById('notification');
+        const notificationTextEl = document.getElementById('notificationText');
+        const deleteSelectedModalEl = document.getElementById('deleteSelectedModal');
+        const cartCounter = document.getElementById('cartCounter');
+
+        // Initialize the cart
+        function initCart() {
+            updateCartDisplay();
+            renderCartItems();
+            updateCartSummary();
+            updateDeleteButtonState();
+            updateCheckoutButtonState();
+            updateCartCounter();
+        }
+
+        // Update cart display based on items
+        function updateCartDisplay() {
+            if (cartItems.length === 0) {
+                emptyCartEl.style.display = 'flex';
+                cartContentEl.style.display = 'none';
+            } else {
+                emptyCartEl.style.display = 'none';
+                cartContentEl.style.display = 'block';
+            }
+        }
+
+        // Render cart items dengan data pembeli yang berbeda
+        function renderCartItems() {
+            cartItemsEl.innerHTML = '';
+            
+            if (cartItems.length === 0) {
+                updateCartDisplay();
+                return;
+            }
+            
+            cartItems.forEach((item, index) => {
+                const oldPrice = item.originalPrice || item.price;
+                const discountAmount = oldPrice - item.price;
+                const discountPercentage = oldPrice > item.price ? Math.round((discountAmount / oldPrice) * 100) : 0;
+                const subtotal = item.price * item.quantity;
+                
+                const cartItemEl = document.createElement('div');
+                cartItemEl.className = `cart-item ${item.selected ? 'selected' : ''}`;
+                cartItemEl.setAttribute('data-id', item.id);
+                cartItemEl.setAttribute('data-index', index);
+                cartItemEl.onclick = (e) => {
+                    // Cegah trigger ketika mengklik checkbox atau tombol quantity
+                    if (!e.target.closest('.cart-item-checkbox') && !e.target.closest('.quantity-btn')) {
+                        goToProductDetail(index);
+                    }
+                };
+                
+                cartItemEl.innerHTML = `
+                    <div class="cart-item-checkbox ${item.selected ? 'selected' : ''}" onclick="event.stopPropagation(); toggleSelect(${index})">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="cart-item-image">
+                        ${item.image ? `<img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : ''}
+                        <i class="fas fa-cube" style="${item.image ? 'display: none;' : ''}"></i>
+                    </div>
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-package">Varian: ${item.variant}</div>
+                        <div class="cart-item-prices">
+                            <span class="new-price">Rp ${formatCurrency(item.price)}</span>
+                            ${oldPrice > item.price ? `<span class="old-price">Rp ${formatCurrency(oldPrice)}</span>` : ''}
+                            ${discountPercentage > 0 ? `<span class="discount-badge">${discountPercentage}%</span>` : ''}
+                        </div>
+                        <div class="buyer-info-indicator">
+                            <i class="fas fa-user"></i> 
+                            ${item.buyerData && item.buyerData.fullname ? item.buyerData.fullname : 'Data pembeli belum diisi'}
+                        </div>
+                        <div class="cart-item-controls">
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="event.stopPropagation(); updateItemQuantity(${index}, -1)">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <span class="quantity-display">${item.quantity}</span>
+                                <button class="quantity-btn" onclick="event.stopPropagation(); updateItemQuantity(${index}, 1)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <div class="item-subtotal">Rp ${formatCurrency(subtotal)}</div>
+                        </div>
+                    </div>
+                `;
+                
+                cartItemsEl.appendChild(cartItemEl);
+            });
+        }
+
+        // Fungsi untuk pergi ke halaman detail produk dengan data sebelumnya
+        function goToProductDetail(itemIndex) {
+            const item = cartItems[itemIndex];
+            
+            if (!item) return;
+            
+            // Simpan data item yang diklik ke localStorage untuk digunakan di halaman produk
+            const productData = {
+                productId: item.productId,
+                variant: item.variant,
+                quantity: item.quantity,
+                buyerData: item.buyerData || {}
+            };
+            
+            localStorage.setItem('restoreProductData', JSON.stringify(productData));
+            
+            // Redirect ke halaman detail produk
+            window.location.href = `product-dg.html?id=${item.productId}`;
+        }
+
+        // Toggle item selection
+        function toggleSelect(itemIndex) {
+            cartItems[itemIndex].selected = !cartItems[itemIndex].selected;
+            renderCartItems();
+            updateCartSummary();
+            updateDeleteButtonState();
+            updateCheckoutButtonState();
+            saveCartToLocalStorage();
+        }
+
+        // Update item quantity
+        function updateItemQuantity(itemIndex, change) {
+            cartItems[itemIndex].quantity += change;
+            
+            if (cartItems[itemIndex].quantity < 1) {
+                cartItems[itemIndex].quantity = 1;
+            }
+            
+            if (cartItems[itemIndex].quantity === 0) {
+                cartItems.splice(itemIndex, 1);
+                showNotification('Produk berhasil dihapus dari keranjang!');
+            }
+            
+            renderCartItems();
+            updateCartSummary();
+            updateCartDisplay();
+            updateCartCounter();
+            updateDeleteButtonState();
+            updateCheckoutButtonState();
+            saveCartToLocalStorage();
+        }
+
+        // Update cart summary
+        function updateCartSummary() {
+            let subtotal = 0;
+            let totalDiscount = 0;
+            
+            cartItems.forEach(item => {
+                if (item.selected) {
+                    const itemSubtotal = item.price * item.quantity;
+                    const itemDiscount = ((item.originalPrice || item.price) - item.price) * item.quantity;
+                    
+                    subtotal += itemSubtotal;
+                    totalDiscount += itemDiscount;
+                }
+            });
+            
+            const total = subtotal - totalDiscount;
+            
+            subtotalEl.textContent = `Rp ${formatCurrency(subtotal)}`;
+            discountEl.textContent = `-Rp ${formatCurrency(totalDiscount)}`;
+            totalEl.textContent = `Rp ${formatCurrency(total)}`;
+        }
+
+        // Update delete button state
+        function updateDeleteButtonState() {
+            const hasSelectedItems = cartItems.some(item => item.selected);
+            deleteSelectedBtn.disabled = !hasSelectedItems;
+        }
+
+        // Update checkout button state
+        function updateCheckoutButtonState() {
+            const hasSelectedItems = cartItems.some(item => item.selected);
+            checkoutBtn.disabled = !hasSelectedItems;
+        }
+
+        // Update cart counter
+        function updateCartCounter() {
+            const totalItems = cartItems.length;
+            
+            if (cartCounter) {
+                cartCounter.textContent = totalItems > 99 ? '99+' : totalItems;
+                cartCounter.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+        }
+
+        // Format mata uang
+        function formatCurrency(amount) {
+            return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Show notification
+        function showNotification(message) {
+            notificationTextEl.textContent = message;
+            notificationEl.classList.add('show');
+            
+            setTimeout(() => {
+                notificationEl.classList.remove('show');
+            }, 3000);
+        }
+
+        // Show delete selected modal
+        function showDeleteSelectedModal() {
+            const selectedCount = cartItems.filter(item => item.selected).length;
+            
+            if (selectedCount > 0) {
+                deleteSelectedModalEl.classList.add('show');
+            }
+        }
+
+        // Hide delete selected modal
+        function hideDeleteSelectedModal() {
+            deleteSelectedModalEl.classList.remove('show');
+        }
+
+        // Delete selected items
+        function deleteSelectedItems() {
+            const selectedCount = cartItems.filter(item => item.selected).length;
+            cartItems = cartItems.filter(item => !item.selected);
+            hideDeleteSelectedModal();
+            renderCartItems();
+            updateCartSummary();
+            updateCartDisplay();
+            updateDeleteButtonState();
+            updateCheckoutButtonState();
+            updateCartCounter();
+            saveCartToLocalStorage();
+            showNotification(`${selectedCount} produk berhasil dihapus dari keranjang!`);
+        }
+
+        // Save cart to localStorage
+        function saveCartToLocalStorage() {
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+        }
+
+        // Go to home
+        function goToHome() {
+            window.location.href = 'product.html';
+        }
+
+        // Go to cart
+        function goToCart() {
+            // Already on cart page
+        }
+
+        // Go to checkout - SETIAP PRODUK DENGAN DATA PEMBELI BERBEDA
+        function goToCheckout() {
+            const selectedItems = cartItems.filter(item => item.selected);
+            
+            if (selectedItems.length === 0) {
+                showNotification('Pilih minimal 1 produk untuk checkout!');
+                return;
+            }
+
+            const selectedPayment = localStorage.getItem('selectedPayment') || 'qris';
+            const paymentText = selectedPayment === 'qris' ? 'QRIS' : 'DANA';
+
+            let whatsappMessage = `🛒 *PEMESANAN DARI WEBSITE PRODUCTDASH* 🛒%0A%0A`;
+            whatsappMessage += `📋 *JUMLAH PRODUK DIPESAN: ${selectedItems.length} ITEM*%0A%0A`;
+
+            // SETIAP PRODUK MENAMPILKAN DATA PEMBELINYA MASING-MASING
+            selectedItems.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                const buyerData = item.buyerData || {};
+                
+                whatsappMessage += `📦 *PRODUK ${index + 1}: ${item.name}*%0A`;
+                whatsappMessage += `╔═══════════════════════╗%0A`;
+                whatsappMessage += `║ *Detail Produk*%0A`;
+                whatsappMessage += `║ ┣━━ Nama: ${item.name}%0A`;
+                whatsappMessage += `║ ┣━━ Varian: ${item.variant}%0A`;
+                whatsappMessage += `║ ┣━━ Jumlah: ${item.quantity}x%0A`;
+                whatsappMessage += `║ ┣━━ Harga: Rp ${formatCurrency(item.price)}%0A`;
+                whatsappMessage += `║ ┗━━ Subtotal: Rp ${formatCurrency(itemTotal)}%0A`;
+                whatsappMessage += `║%0A`;
+                whatsappMessage += `║ *Data Pembeli*%0A`;
+                whatsappMessage += `║ ┣━━ Nama: ${buyerData.fullname || 'Belum diisi'}%0A`;
+                whatsappMessage += `║ ┣━━ WhatsApp: ${buyerData.phone || 'Belum diisi'}%0A`;
+                whatsappMessage += `║ ┣━━ Kota: ${buyerData.city || 'Belum diisi'}%0A`;
+                
+                if (buyerData.message && buyerData.message.trim() !== '') {
+                    whatsappMessage += `║ ┗━━ Pesan: ${buyerData.message}%0A`;
+                } else {
+                    whatsappMessage += `║ ┗━━ Pesan: -%0A`;
+                }
+                
+                whatsappMessage += `╚═══════════════════════╝%0A%0A`;
+            });
+
+            // Total harga semua produk
+            const totalHarga = selectedItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            whatsappMessage += `💰 *TOTAL SEMUA PRODUK*:%0A`;
+            whatsappMessage += `┏━━━━━━━━━━━━━━━━━━━━┓%0A`;
+            whatsappMessage += `┃ Total: Rp ${formatCurrency(totalHarga)}%0A`;
+            whatsappMessage += `┗━━━━━━━━━━━━━━━━━━━━┛%0A%0A`;
+
+            // Metode Pembayaran
+            whatsappMessage += `💳 *METODE PEMBAYARAN*: ${paymentText}%0A%0A`;
+
+            // Informasi tambahan
+            whatsappMessage += `📝 *CATATAN*:%0A`;
+            whatsappMessage += `• Setiap produk memiliki data pembeli sendiri%0A`;
+            whatsappMessage += `• Data pembeli sesuai saat produk dimasukkan ke keranjang%0A%0A`;
+
+            // Footer
+            whatsappMessage += `_📦 Pesanan ini dibuat melalui website ProductDash_%0A`;
+            whatsappMessage += `_⏰ Mohon konfirmasi ketersediaan stok terlebih dahulu_`;
+
+            const whatsappUrl = `https://wa.me/6287866361260?text=${whatsappMessage}`;
+            window.open(whatsappUrl, '_blank');
+            
+            showNotification('Pesanan berhasil dikirim via WhatsApp!');
+        }
+
+        // Initialize the cart when page loads
+        document.addEventListener('DOMContentLoaded', initCart);
+    </script>
+</body>
+</html>
