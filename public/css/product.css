@@ -1199,10 +1199,10 @@
                 height: 70px;
             }
         }
-/* --- Tambahan agar tombol Dark/Light Mode tidak tertutup URL bar dan tetap rapi --- */
+/* --- Awal: posisi default aman --- */
 .theme-toggle {
     position: fixed;
-    bottom: 80px; /* naik sedikit agar aman dari bilah URL mobile */
+    bottom: 70px;
     left: 20px;
     right: 20px;
     display: flex;
@@ -1216,19 +1216,14 @@
     transition: all 0.3s ease;
 }
 
-/* Saat mode terang */
-body.light-mode .theme-toggle {
-    background: var(--sidebar-bg-light, #f9f9f9);
+/* Saat URL bar muncul, tombol otomatis naik */
+.theme-toggle.safe {
+    bottom: 120px; /* naik ke atas agar tetap terlihat */
 }
 
-/* Hover efek untuk tampilan interaktif */
-.theme-toggle:hover {
-    transform: scale(1.03);
-}
-
-/* --- Versi desktop: tetap nempel di dalam sidebar --- */
+/* Desktop tetap menempel bawah */
 @media (min-width: 768px) {
-    .theme-toggle {
+    .theme-toggle, .theme-toggle.safe {
         position: absolute;
         bottom: 30px;
         left: 20px;
