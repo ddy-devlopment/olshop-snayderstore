@@ -23,7 +23,12 @@
             <div class="logo-icon">
                 <i class="fas fa-palette"></i>
             </div>
-            <h1>Digital Products</h1>
+            <h1>Dash</h1>
+            <!-- Toggle theme dipindahkan ke sini -->
+            <div class="toggle-switch logo-toggle" id="themeToggle">
+                <i class="fas fa-sun toggle-icon sun"></i>
+                <i class="fas fa-moon toggle-icon moon"></i>
+            </div>
         </div>
         
         <div class="nav-menu">
@@ -67,16 +72,7 @@
             </a>
         </div>
         
-        <div class="theme-toggle">
-            <div class="mode-indicator" id="modeIndicator">
-                <i class="fas fa-moon icon"></i>
-                <span class="text">Dark Mode</span>
-            </div>
-            <div class="toggle-switch" id="themeToggle">
-                <i class="fas fa-sun toggle-icon sun"></i>
-                <i class="fas fa-moon toggle-icon moon"></i>
-            </div>
-        </div>
+        <!-- Hapus bagian theme-toggle yang lama -->
     </div>
     
     <!-- Main Content -->
@@ -326,32 +322,18 @@
             }
         });
 
-        // Dark/Light mode toggle
+        // Dark/Light mode toggle - versi sederhana
         const themeToggle = document.getElementById('themeToggle');
-        const modeIndicator = document.getElementById('modeIndicator');
-        const modeIcon = modeIndicator.querySelector('.icon');
-        const modeText = modeIndicator.querySelector('.text');
         const body = document.body;
-        
+
         // Check for saved theme preference or default to dark
         const currentTheme = localStorage.getItem('theme') || 'dark';
         if (currentTheme === 'light') {
             body.classList.add('light-mode');
-            modeText.textContent = 'Light Mode';
-            modeIcon.className = 'fas fa-sun icon';
         }
-        
+
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('light-mode');
-            
-            // Update the mode indicator
-            if (body.classList.contains('light-mode')) {
-                modeText.textContent = 'Light Mode';
-                modeIcon.className = 'fas fa-sun icon';
-            } else {
-                modeText.textContent = 'Dark Mode';
-                modeIcon.className = 'fas fa-moon icon';
-            }
             
             // Save the current theme to localStorage
             const theme = body.classList.contains('light-mode') ? 'light' : 'dark';
