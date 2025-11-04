@@ -889,6 +889,20 @@
             transform: translateY(-2px);
         }
 
+        /* Logout Button Styles */
+        .btn-logout {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            margin-top: auto;
+            justify-content: center;
+        }
+
+        .btn-logout:hover {
+            background: rgba(239, 68, 68, 0.2);
+            transform: translateY(-2px);
+        }
+
         /* Responsive modal styles */
         @media (max-width: 480px) {
             .delete-modal {
@@ -1073,6 +1087,17 @@
     </style>
 </head>
 <body>
+    <!-- Authentication Check Script -->
+    <script>
+        // Cek apakah user sudah login
+        (function() {
+            const authToken = localStorage.getItem('authToken');
+            if (!authToken) {
+                window.location.href = '/login.html';
+            }
+        })();
+    </script>
+
     <!-- Mobile Header -->
     <div class="mobile-header">
         <button class="menu-toggle" id="menuToggle">
@@ -1129,6 +1154,12 @@
             <i class="fas fa-arrow-left"></i>
             Kembali ke Dashboard
         </a>
+        
+        <!-- Tombol Logout -->
+        <button class="btn btn-logout" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+        </button>
     </div>
     
     <!-- Main Content -->
@@ -1324,6 +1355,13 @@
                     sidebar.classList.remove('mobile-visible');
                 }
             }
+        });
+
+        // Logout functionality
+        const logoutBtn = document.getElementById('logoutBtn');
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('authToken');
+            window.location.href = '/login.html';
         });
 
         // Form elements
