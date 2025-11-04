@@ -746,3 +746,6 @@
                 font-size: 14px;
             }
         }
+.theme-toggle {
+    display: none !important;
+}
