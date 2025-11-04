@@ -830,3 +830,6 @@
                 grid-template-columns: 1fr;
             }
         }
+.theme-toggle {
+    display: none !important;
+}
