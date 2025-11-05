@@ -444,6 +444,24 @@
 
         // Initialize the cart when page loads
         document.addEventListener('DOMContentLoaded', initCart);
+        // Dark/Light mode functionality
+function initTheme() {
+    const body = document.body;
+    
+    // Check for saved theme preference or default to dark
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    
+    // Apply the saved theme
+    if (currentTheme === 'light') {
+        body.classList.add('light-mode');
+    }
+}
+
+// Initialize theme when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    initTheme(); // Panggil fungsi initTheme terlebih dahulu
+    initCart();
+});
     </script>
 </body>
 </html>
