@@ -673,3 +673,59 @@
             transform: translateX(20px);
             transition: var(--transition);
         }
+        /* Light Mode Variables */
+.light-mode {
+    --bg-dark: #F9FAFB;
+    --bg-card: #FFFFFF;
+    --bg-input: #F3F4F6;
+    --primary: #7C3AED;
+    --primary-light: #8B5CF6;
+    --accent: #0095E8;
+    --text-primary: #111827;
+    --text-secondary: #6B7280;
+    --text-muted: #9CA3AF;
+    --success: #059669;
+    --warning: #D97706;
+    --danger: #DC2626;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.light-mode .cart-header {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .cart-items-section,
+.light-mode .cart-summary {
+    background-color: var(--bg-card);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .cart-item {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.light-mode .cart-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .cart-item.selected {
+    background-color: rgba(124, 58, 237, 0.1);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.light-mode .back-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .delete-selected-btn:hover {
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+.light-mode .quantity-btn {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .quantity-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
