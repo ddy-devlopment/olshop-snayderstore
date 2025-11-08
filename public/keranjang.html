@@ -292,22 +292,22 @@
         }
 
         // Update cart summary
-        function updateCartSummary() {
+     function updateCartSummary() {
     let subtotal = 0;
     let totalDiscount = 0;
-    
+
     cartItems.forEach(item => {
         if (item.selected) {
-            const itemSubtotal = item.price * item.quantity;
-            const itemDiscount = ((item.originalPrice || item.price) - item.price) * item.quantity;
-            
-            subtotal += itemSubtotal;
-            totalDiscount += itemDiscount;
+            const originalPrice = item.originalPrice || item.price;
+            const discountAmount = (originalPrice - item.price) * item.quantity;
+
+            subtotal += item.price * item.quantity;  // harga diskon
+            totalDiscount += discountAmount;         // total potongan
         }
     });
-    
-    const total = subtotal - totalDiscount;
-    
+
+    const total = subtotal; // tidak dikurangi lagi agar tidak double diskon
+
     subtotalEl.textContent = `Rp ${formatCurrency(subtotal)}`;
     discountEl.textContent = `-Rp ${formatCurrency(totalDiscount)}`;
     totalEl.textContent = `Rp ${formatCurrency(total)}`;
