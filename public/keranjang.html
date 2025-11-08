@@ -293,26 +293,25 @@
 
         // Update cart summary
         function updateCartSummary() {
-            let subtotal = 0;
-            let totalDiscount = 0;
+    let subtotal = 0;
+    let totalDiscount = 0;
+    
+    cartItems.forEach(item => {
+        if (item.selected) {
+            const itemSubtotal = item.price * item.quantity;
+            const itemDiscount = ((item.originalPrice || item.price) - item.price) * item.quantity;
             
-            cartItems.forEach(item => {
-                if (item.selected) {
-                    const itemSubtotal = item.price * item.quantity;
-                    const itemDiscount = ((item.originalPrice || item.price) - item.price) * item.quantity;
-                    
-                    subtotal += itemSubtotal;
-                    totalDiscount += itemDiscount;
-                }
-            });
-            
-            const total = subtotal - totalDiscount;
-            
-            subtotalEl.textContent = `Rp ${formatCurrency(subtotal)}`;
-            discountEl.textContent = `-Rp ${formatCurrency(totalDiscount)}`;
-            totalEl.textContent = `Rp ${formatCurrency(total)}`;
+            subtotal += itemSubtotal;
+            totalDiscount += itemDiscount;
         }
-
+    });
+    
+    const total = subtotal - totalDiscount;
+    
+    subtotalEl.textContent = `Rp ${formatCurrency(subtotal)}`;
+    discountEl.textContent = `-Rp ${formatCurrency(totalDiscount)}`;
+    totalEl.textContent = `Rp ${formatCurrency(total)}`;
+}
         // Update delete button state
         function updateDeleteButtonState() {
             const hasSelectedItems = cartItems.some(item => item.selected);
