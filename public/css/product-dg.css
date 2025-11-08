@@ -850,3 +850,22 @@ body.light-mode .cart-icon {
 body.light-mode .back-btn:hover {
     background-color: rgba(0, 0, 0, 0.05);
 }
+/* 🎛️ Perbaikan warna tombol quantity & tombol kembali pada mode terang */
+body.light-mode .quantity-btn {
+    background-color: #e5e7eb; /* abu terang agar kontras */
+    color: #111827; /* teks dan ikon gelap */
+    border: 1px solid #d1d5db;
+}
+
+body.light-mode .quantity-btn:hover {
+    background-color: #d1d5db; /* sedikit lebih gelap saat hover */
+}
+
+body.light-mode .back-btn {
+    color: #111827;
+    background-color: transparent;
+}
+
+body.light-mode .back-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
