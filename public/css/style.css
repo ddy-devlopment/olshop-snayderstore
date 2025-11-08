@@ -143,16 +143,29 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     flex-grow: 1;
-}
-
+}/* === Logo Ikon Gambar Sidebar (ukuran ikon tetap, gambar sedikit diperkecil) === */
 .logo-icon {
-    background-color: var(--primary);
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
+    background-color: #2C2C2C; /* kontras dengan ikon ungu */
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.sidebar-logo-img {
+    width: 100%;   /* Mengisi seluruh area logo-icon */
+    height: 100%;
+    object-fit: cover; /* Memastikan gambar tidak terdistorsi */
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.logo-icon:hover .sidebar-logo-img {
+    transform: scale(1.08);
 }
 
 /* Style untuk toggle di logo */
@@ -208,7 +221,6 @@ body {
 .light-mode .logo-toggle .toggle-icon.moon {
     opacity: 0;
 }
-
 .nav-menu {
     flex-grow: 1;
 }

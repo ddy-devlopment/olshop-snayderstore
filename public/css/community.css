@@ -150,16 +150,25 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+.logo-icon {
+    background-color: #2C2C2C; /* kontras dengan ikon ungu */
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
 
-        .logo-icon {
-            background-color: var(--primary);
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.sidebar-logo-img {
+    width: 100%;   /* Mengisi seluruh area logo-icon */
+    height: 100%;
+    object-fit: cover; /* Memastikan gambar tidak terdistorsi */
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
 
         .nav-menu {
             flex-grow: 1;
