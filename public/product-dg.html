@@ -684,6 +684,22 @@
             document.getElementById('loading-container').style.display = 'none';
             document.getElementById('error-container').style.display = 'flex';
         }
+        // 🌗 Tema Dark & Light Sinkron dengan Keranjang
+function initTheme() {
+    const body = document.body;
+    const currentTheme = localStorage.getItem('theme') || 'dark'; // default dark
+
+    if (currentTheme === 'light') {
+        body.classList.add('light-mode');
+    } else {
+        body.classList.remove('light-mode');
+    }
+}
+
+// Jalankan otomatis saat halaman selesai dimuat
+document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+});
     </script>
 </body>
 </html>
