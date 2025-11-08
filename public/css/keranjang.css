@@ -283,6 +283,30 @@
         .cart-item-checkbox.selected i {
             opacity: 1;
         }
+/* ✅ Perbaikan checkbox agar terlihat di Light Mode */
+.light-mode .cart-item-checkbox {
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .cart-item-checkbox:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.light-mode .cart-item-checkbox.selected {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border: none;
+}
+
+.light-mode .cart-item-checkbox i {
+    color: white;
+    opacity: 0;
+}
+
+.light-mode .cart-item-checkbox.selected i {
+    opacity: 1;
+}
+
 
         .cart-item-image {
             width: 70px;
