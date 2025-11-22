@@ -765,74 +765,75 @@
                 font-size: 14px;
             }
         }
-        /* Modal Peringatan */
-.modal-overlay {
+#buyerModal.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: all .3s ease;
+    z-index: 1500;
 }
 
-.modal-overlay.show {
+#buyerModal.show {
     opacity: 1;
     visibility: visible;
 }
 
-.modal-content {
-    background: var(--card-bg, #1e1e1e);
-    color: var(--text-color, #ffffff);
-    padding: 24px;
-    border-radius: 16px;
-    max-width: 400px;
+#buyerModal .modal-content {
+    background: var(--bg-card);
     width: 90%;
+    max-width: 350px;
+    padding: 24px;
+    border-radius: 18px;
     text-align: center;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    transform: scale(0.7);
-    transition: transform 0.3s ease;
+    color: var(--text-primary);
+    transform: scale(0.85);
+    transition: .3s ease;
 }
 
-.modal-overlay.show .modal-content {
+#buyerModal.show .modal-content {
     transform: scale(1);
 }
 
-.modal-icon {
+#buyerModal .modal-icon {
     font-size: 48px;
-    color: #ffcc00;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--warning), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.modal-text {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 24px;
+#buyerModal .modal-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
 }
 
-.modal-btn {
-    background: var(--accent-color, #ff0048);
-    color: white;
+#buyerModal .modal-text {
+    color: var(--text-secondary);
+    font-size: 15px;
+    margin-bottom: 22px;
+}
+
+#buyerModal .modal-btn {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
     border: none;
     padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 14px;
+    color: white;
+    border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.modal-btn:hover {
-    background: var(--accent-hover, #e00040);
-}
-        /* 🌞 Light Mode Styles */
+    width: 100%;
+    transition: .2s ease;
+}/* 🌞 Light Mode Styles */
 body.light-mode {
     background-color: #f9fafb;
     color: #111827;
