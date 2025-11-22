@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cek Area XL - Snayders Store</title>
-    <meta name="description" content="Cek area XL berdasarkan kota/kabupaten - Snayders Store">
+    <title>Cek Area XL & Axis- Snayders Store</title>
+    <meta name="description" content="Cek area XL & AXIS berdasarkan kota/kabupaten - Snayders Store">
 
     <!-- 🌟 Favicon -->
     <link rel="icon" href="https://raw.githubusercontent.com/klandestin-s/Cloud_v2/main/tmp/3c60e32c.jpg" type="image/jpeg">
@@ -12,8 +12,8 @@
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/klandestin-s/Cloud_v2/main/tmp/3c60e32c.jpg">
 
     <!-- 💬 Open Graph (Facebook, WhatsApp, Telegram, Discord) -->
-    <meta property="og:title" content="Cek Area XL - Snayders Store">
-    <meta property="og:description" content="Cek area XL berdasarkan kota/kabupaten">
+    <meta property="og:title" content="Cek Area XL & AXIS - Snayders Store">
+    <meta property="og:description" content="Cek area XL & AXIS berdasarkan kota/kabupaten">
     <meta property="og:image" content="https://raw.githubusercontent.com/klandestin-s/Cloud_v2/main/tmp/404c5a7b.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -45,7 +45,7 @@
             <div class="logo-icon">
                 <img src="https://raw.githubusercontent.com/klandestin-s/Cloud_v2/main/tmp/47603e7a.jpg" alt="Logo" style="width:40px; height:40px; border-radius:8px;">
             </div>
-            <h1>Cek Area XL</h1>
+            <h1>Cek Area XL & AXIS</h1>
         </div>
         
         <div class="nav-menu">
@@ -86,7 +86,7 @@
             
             <!-- Menu Baru: Cek Area XL -->
             <a href="xlcekarea.html" class="nav-item active">
-                <i class="fas fa-map-marked-alt"></i><span>Cek Area XL</span>
+                <i class="fas fa-map-marked-alt"></i><span>Cek Area XL & AXIS</span>
             </a>
             
             <a href="help-center.html" class="nav-item">
@@ -111,7 +111,7 @@
         <div class="content-wrapper">
             <div class="header">
                 <div class="page-title">
-                    <h1>Cek Area XL</h1>
+                    <h1>Cek Area XL & AXIS</h1>
                     <p>Cek area XL berdasarkan kota/kabupaten</p>
                 </div>
                 
@@ -641,11 +641,10 @@
                 toolsDropdown.classList.remove('active');
             }
         });
-
-        // Search functionality
+// Search functionality
 function searchTable() {
     const input = document.getElementById("searchInput");
-    const filter = input.value.toLowerCase();
+    const filter = input.value.toLowerCase().trim();
     const table = document.getElementById("dataTable");
     const tr = table.getElementsByTagName("tr");
 
@@ -656,25 +655,24 @@ function searchTable() {
         for (let j = 0; j < td.length; j++) {
             const cell = td[j];
             if (cell) {
-                // Get original text content without any HTML tags
-                const originalText = cell.textContent || cell.innerText;
-                
-                // Reset cell content to original state
-                if (j === 2) { // Area column - keep badge styling
-                    cell.innerHTML = originalText;
-                } else {
-                    // Remove any existing highlights and restore original text
-                    cell.innerHTML = originalText;
+                // Simpan HTML asli jika belum disimpan
+                if (!cell.hasAttribute('data-original-html')) {
+                    cell.setAttribute('data-original-html', cell.innerHTML);
                 }
                 
-                // If search is not empty, perform search and highlight
-                if (filter.trim() !== '') {
-                    if (originalText.toLowerCase().indexOf(filter) > -1) {
+                const originalHTML = cell.getAttribute('data-original-html');
+                const textContent = cell.textContent || cell.innerText;
+                
+                // Reset ke HTML asli
+                cell.innerHTML = originalHTML;
+                
+                if (filter !== '') {
+                    if (textContent.toLowerCase().indexOf(filter) > -1) {
                         found = true;
-                        // Highlight the matching text (skip area column)
-                        if (j !== 2) {
+                        // Highlight hanya untuk kolom provinsi dan kota (bukan area)
+                        if (j !== 2) { // Skip area column (index 2)
                             const regex = new RegExp(`(${filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, "gi");
-                            const highlightedText = originalText.replace(regex, '<span class="highlight">$1</span>');
+                            const highlightedText = textContent.replace(regex, '<span class="highlight">$1</span>');
                             cell.innerHTML = highlightedText;
                         }
                     }
@@ -682,13 +680,8 @@ function searchTable() {
             }
         }
 
-        // Show/hide rows based on search results
-        if (filter.trim() === '') {
-            // If search is empty, show all rows
-            tr[i].style.display = "";
-        } else {
-            tr[i].style.display = found ? "" : "none";
-        }
+        // Show/hide rows
+        tr[i].style.display = (filter === '' || found) ? "" : "none";
     }
 }
 
@@ -696,11 +689,17 @@ function searchTable() {
 const searchInput = document.getElementById('searchInput');
 searchInput.addEventListener('input', searchTable);
 
-// Reset search when page loads or refreshes
+// Reset search when page loads
 window.addEventListener('load', function() {
     const searchInput = document.getElementById('searchInput');
     searchInput.value = '';
-    searchTable(); // Reset the table to remove any highlights
+    
+    // Set original HTML for all cells
+    const table = document.getElementById("dataTable");
+    const cells = table.querySelectorAll('td');
+    cells.forEach(cell => {
+        cell.setAttribute('data-original-html', cell.innerHTML);
+    });
 });
     </script>
 </body>
