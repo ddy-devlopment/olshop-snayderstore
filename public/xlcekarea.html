@@ -643,45 +643,65 @@
         });
 
         // Search functionality
-        function searchTable() {
-            const input = document.getElementById("searchInput");
-            const filter = input.value.toLowerCase();
-            const table = document.getElementById("dataTable");
-            const tr = table.getElementsByTagName("tr");
+function searchTable() {
+    const input = document.getElementById("searchInput");
+    const filter = input.value.toLowerCase();
+    const table = document.getElementById("dataTable");
+    const tr = table.getElementsByTagName("tr");
 
-            for (let i = 1; i < tr.length; i++) {
-                const td = tr[i].getElementsByTagName("td");
-                let found = false;
+    for (let i = 1; i < tr.length; i++) {
+        const td = tr[i].getElementsByTagName("td");
+        let found = false;
 
-                for (let j = 0; j < td.length; j++) {
-                    const cell = td[j];
-                    if (cell) {
-                        const txtValue = cell.textContent || cell.innerText;
-                        // Reset cell content to plain text
-                        if (j === 2) { // Area column
-                            cell.innerHTML = txtValue;
-                        } else {
-                            cell.innerHTML = txtValue.replace(/<span class="highlight">|<\/span>/g, '');
-                        }
-                        
-                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                            found = true;
-                            // Highlight the matching text
-                            if (j !== 2) { // Don't highlight area column
-                                const highlightedText = txtValue.replace(new RegExp(`(${filter})`, "gi"), '<span class="highlight">$1</span>');
-                                cell.innerHTML = highlightedText;
-                            }
+        for (let j = 0; j < td.length; j++) {
+            const cell = td[j];
+            if (cell) {
+                // Get original text content without any HTML tags
+                const originalText = cell.textContent || cell.innerText;
+                
+                // Reset cell content to original state
+                if (j === 2) { // Area column - keep badge styling
+                    cell.innerHTML = originalText;
+                } else {
+                    // Remove any existing highlights and restore original text
+                    cell.innerHTML = originalText;
+                }
+                
+                // If search is not empty, perform search and highlight
+                if (filter.trim() !== '') {
+                    if (originalText.toLowerCase().indexOf(filter) > -1) {
+                        found = true;
+                        // Highlight the matching text (skip area column)
+                        if (j !== 2) {
+                            const regex = new RegExp(`(${filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, "gi");
+                            const highlightedText = originalText.replace(regex, '<span class="highlight">$1</span>');
+                            cell.innerHTML = highlightedText;
                         }
                     }
                 }
-
-                tr[i].style.display = found ? "" : "none";
             }
         }
 
-        // Event listener for search input
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('input', searchTable);
+        // Show/hide rows based on search results
+        if (filter.trim() === '') {
+            // If search is empty, show all rows
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = found ? "" : "none";
+        }
+    }
+}
+
+// Event listener for search input
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', searchTable);
+
+// Reset search when page loads or refreshes
+window.addEventListener('load', function() {
+    const searchInput = document.getElementById('searchInput');
+    searchInput.value = '';
+    searchTable(); // Reset the table to remove any highlights
+});
     </script>
 </body>
 </html>
