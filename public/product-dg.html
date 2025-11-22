@@ -242,45 +242,35 @@
         </div>
         <div class="notification-text">Pesanan berhasil dikirim via WhatsApp!</div>
     </div>
-    <!-- Warning Modal -->
-    <div class="modal-overlay" id="warningModal" style="display: none;">
-        <div class="modal-content">
-            <div class="modal-icon">
-                <i class="fas fa-exclamation-circle"></i>
-            </div>
-            <div class="modal-text" id="warningText"></div>
-            <button class="modal-btn" onclick="closeWarningModal()">Mengerti</button>
+<!-- Popup Validasi Data Pembeli -->
+<div class="modal-overlay" id="buyerModal">
+    <div class="modal-content">
+        <div class="modal-icon">
+            <i class="fas fa-exclamation-circle"></i>
         </div>
+        <div class="modal-title">Perhatian</div>
+        <div class="modal-text" id="buyerModalText"></div>
+        <button class="modal-btn" onclick="closeBuyerModal()">Mengerti</button>
     </div>
-
+</div>
     <script>
         // Variabel global
         let currentProduct = null;
         let selectedVariantIndex = 0;
         let quantity = 1;
         let selectedPayment = localStorage.getItem('selectedPayment') || 'qris';
+function showBuyerWarning(message) {
+    const modal = document.getElementById("buyerModal");
+    const text = document.getElementById("buyerModalText");
 
-        // Fungsi untuk menampilkan modal peringatan
-        function showWarning(message) {
-            const modal = document.getElementById('warningModal');
-            const warningText = document.getElementById('warningText');
-            warningText.textContent = message;
-            modal.style.display = 'flex';
-            // Tambahkan class show setelah sedikit delay untuk trigger animation
-            setTimeout(() => {
-                modal.classList.add('show');
-            }, 10);
-        }
+    text.textContent = message;
+    modal.classList.add("show");
+}
 
-        // Fungsi untuk menutup modal peringatan
-        function closeWarningModal() {
-            const modal = document.getElementById('warningModal');
-            modal.classList.remove('show');
-            // Setelah animasi selesai, sembunyikan modal
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-        }
+function closeBuyerModal() {
+    const modal = document.getElementById("buyerModal");
+    modal.classList.remove("show");
+}
 
         // Fungsi untuk mengambil parameter ID dari URL
         function getProductIdFromURL() {
@@ -560,18 +550,18 @@
 
     // Validasi wajib
     if (!fullname) {
-        showWarning('Nama lengkap wajib diisi.');
+        showBuyerWarning('Nama lengkap wajib diisi.');
         return;
     }
 
     if (!city) {
-        showWarning('Kota / provinsi wajib diisi.');
+        showBuyerWarning('Kota / provinsi wajib diisi.');
         return;
     }
 
     // Peringatan opsional untuk nomor WA kosong
     if (!phone) {
-        showWarning('Jika produk yang dipesan memerlukan nomor telepon, harap isi pada bagian nomor telepon tersebut. Lewati jika tidak diperlukan.');
+        showBuyerWarning('Jika produk yang dipesan memerlukan nomor telepon, harap isi pada bagian nomor telepon tersebut. Lewati jika tidak diperlukan.');
         // Tidak return
     }
 
