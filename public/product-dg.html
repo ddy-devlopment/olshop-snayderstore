@@ -549,87 +549,92 @@
             }
         }
 
-        // Fungsi untuk menambahkan produk ke keranjang dengan data pembeli spesifik
         function addToCart() {
-            if (!currentProduct) return;
-            
-            // Validasi form data pembeli
-            const fullname = document.getElementById('fullname').value;
-            const phone = document.getElementById('phone').value;
-            const city = document.getElementById('city').value;
-            
-            // Validasi: Nama wajib
-            if (!fullname) {
-                showWarning('Nama lengkap wajib diisi.');
-                return;
-            }
-            
-            // Validasi: Kota wajib
-            if (!city) {
-                showWarning('Kota / provinsi wajib diisi.');
-                return;
-            }
-            
-            // Peringatan jika nomor WhatsApp kosong (tapi tidak menghentikan proses)
-            if (!phone) {
-                showWarning('Jika produk yang dipesan memerlukan nomor telepon, harap isi pada bagian nomor telepon tersebut. Lewati jika tidak diperlukan.');
-                // Jangan return, karena nomor WhatsApp opsional
-            }
-            
-            // Lanjutkan proses seperti biasa...
-            const variant = currentProduct.varian[selectedVariantIndex];
-            
-            // Buat ID unik berdasarkan product ID dan varian
-            const cartItemId = `${currentProduct.id}-${variant.name}`;
-            
-            // Dapatkan data pembeli terkini - SETIAP PRODUK MENYIMPAN DATA PEMBELI SENDIRI
-            const buyerData = getCurrentBuyerData();
-            
-            const item = {
-                id: cartItemId,
-                productId: currentProduct.id,
-                name: currentProduct.nama,
-                variant: variant.name,
-                quantity: quantity,
-                price: variant.harga_diskon,
-                originalPrice: variant.harga_asli,
-                image: currentProduct.gambar || '',
-                discount: ((variant.harga_asli - variant.harga_diskon) / variant.harga_asli) * 100,
-                total: variant.harga_diskon * quantity,
-                selected: false,
-                // SETIAP ITEM MENYIMPAN DATA PEMBELI YANG BERBEDA
-                buyerData: buyerData
-            };
+    if (!currentProduct) return;
 
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            
-            // Cek apakah produk dengan varian yang sama sudah ada di keranjang
-            const existingItemIndex = cart.findIndex(cartItem => cartItem.id === cartItemId);
-            
-            if (existingItemIndex !== -1) {
-                // Jika sudah ada, update quantity-nya TAPI JANGAN UPDATE DATA PEMBELI
-                // Biarkan data pembeli tetap sesuai saat pertama kali ditambahkan
-                cart[existingItemIndex].quantity += quantity;
-                cart[existingItemIndex].total = cart[existingItemIndex].price * cart[existingItemIndex].quantity;
-            } else {
-                // Jika belum ada, tambahkan item baru dengan data pembeli saat ini
-                cart.push(item);
-            }
+    // Validasi form data pembeli
+    const fullname = document.getElementById('fullname').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const city = document.getElementById('city').value.trim();
+    const message = document.getElementById('message').value.trim();
 
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCounter();
+    // Validasi wajib
+    if (!fullname) {
+        showWarning('Nama lengkap wajib diisi.');
+        return;
+    }
 
-            // Reset form setelah berhasil menambahkan ke keranjang
-            document.getElementById('fullname').value = '';
-            document.getElementById('phone').value = '';
-            document.getElementById('city').value = '';
-            document.getElementById('message').value = '';
-            quantity = 1;
-            document.getElementById('product-qty').textContent = quantity;
-            updateProductDetails();
-            updateOrderSummary();
-        }
+    if (!city) {
+        showWarning('Kota / provinsi wajib diisi.');
+        return;
+    }
 
+    // Peringatan opsional untuk nomor WA kosong
+    if (!phone) {
+        showWarning('Jika produk yang dipesan memerlukan nomor telepon, harap isi pada bagian nomor telepon tersebut. Lewati jika tidak diperlukan.');
+        // Tidak return
+    }
+
+    const variant = currentProduct.varian[selectedVariantIndex];
+
+    // ID unik berdasarkan produk + varian
+    const cartItemId = `${currentProduct.id}-${variant.name}`;
+
+    // Data pembeli terbaru
+    const buyerData = {
+        fullname,
+        phone,
+        city,
+        message,
+        timestamp: new Date().toISOString()
+    };
+
+    // Item baru
+    const newItem = {
+        id: cartItemId,
+        productId: currentProduct.id,
+        name: currentProduct.nama,
+        variant: variant.name,
+        quantity: quantity, // quantity terbaru
+        price: variant.harga_diskon,
+        originalPrice: variant.harga_asli,
+        image: currentProduct.gambar || '',
+        discount: ((variant.harga_asli - variant.harga_diskon) / variant.harga_asli) * 100,
+        total: variant.harga_diskon * quantity,
+        selected: false,
+        buyerData: buyerData
+    };
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // CEK apakah item sudah ada
+    const existingItemIndex = cart.findIndex(item => item.id === cartItemId);
+
+    if (existingItemIndex !== -1) {
+        // ATURAN BARU: UPDATE SEMUA DATA
+        cart[existingItemIndex] = newItem;
+    } else {
+        // Jika belum ada → tambah baru
+        cart.push(newItem);
+    }
+
+    // Simpan keranjang
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Update counter
+    updateCartCounter();
+
+    // Reset form
+    document.getElementById('fullname').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('city').value = '';
+    document.getElementById('message').value = '';
+    quantity = 1;
+    document.getElementById('product-qty').textContent = quantity;
+
+    updateProductDetails();
+    updateOrderSummary();
+}
         // Proses pembayaran langsung dari halaman produk
         function processPayment() {
             if (!currentProduct) return;
