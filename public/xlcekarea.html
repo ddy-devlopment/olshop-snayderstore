@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Area XL - Snayders Store</title>
+    <meta name="description" content="Cek area XL berdasarkan kota/kabupaten - Snayders Store">
+
+    <!-- 🌟 Favicon -->
+    <link rel="icon" href="https://raw.githubusercontent.com/klandestin-s/Cloud_v2/main/tmp/3c60e32c.jpg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/klandestin-s/Cloud_v2/main/tmp/3c60e32c.jpg">
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/klandestin-s/Cloud_v2/main/tmp/3c60e32c.jpg">
+
+    <!-- 💬 Open Graph (Facebook, WhatsApp, Telegram, Discord) -->
+    <meta property="og:title" content="Cek Area XL - Snayders Store">
+    <meta property="og:description" content="Cek area XL berdasarkan kota/kabupaten">
+    <meta property="og:image" content="https://raw.githubusercontent.com/klandestin-s/Cloud_v2/main/tmp/404c5a7b.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://snayders.web.id/xlcekarea.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Snayders Store">
+
+    <!-- 🎨 Warna tema (Discord/Telegram embed) -->
+    <meta name="theme-color" content="#ff0048">
+
+    <!-- Fonts & Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="css/cekareaxl.css">
+</head>
+<body>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="mobile-logo">Snayders STORE</div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon">
+                <img src="https://raw.githubusercontent.com/klandestin-s/Cloud_v2/main/tmp/47603e7a.jpg" alt="Logo" style="width:40px; height:40px; border-radius:8px;">
+            </div>
+            <h1>Cek Area XL</h1>
+        </div>
+        
+        <div class="nav-menu">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-th-large"></i><span>Dashboard</span>
+            </a>
+            <a href="product.html" class="nav-item">
+                <i class="fas fa-box"></i><span>Produk</span>
+            </a>
+            <a href="keranjang.html" class="nav-item">
+                <i class="fas fa-shopping-cart"></i><span>Keranjang</span>
+            </a>
+            <a href="testi.html" class="nav-item">
+                <i class="fas fa-comment-dots"></i><span>Testimoni</span>
+            </a>
+            <a href="komunitas.html" class="nav-item">
+                <i class="fas fa-users"></i><span>Komunitas</span>
+            </a>
+            
+            <!-- PERBAIKAN: Dropdown Menu for Tools -->
+            <div class="nav-dropdown" id="toolsDropdown">
+                <div class="dropdown-toggle">
+                    <div>
+                        <i class="fas fa-toolbox"></i><span> Tools</span>
+                    </div>
+                    <i class="fas fa-chevron-down dropdown-arrow"></i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="convert-v2ray.html" class="dropdown-item">
+                        <i class="fas fa-exchange-alt"></i><span>Convert v2ray to OpenWRT</span>
+                    </a>
+                    <!-- Contoh item tambahan untuk menunjukkan struktur -->
+                    <a href="other-tool.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i><span>Other Tool</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Menu Baru: Cek Area XL -->
+            <a href="xlcekarea.html" class="nav-item active">
+                <i class="fas fa-map-marked-alt"></i><span>Cek Area XL</span>
+            </a>
+            
+            <a href="help-center.html" class="nav-item">
+                <i class="fas fa-question-circle"></i><span>Help Center</span>
+            </a>
+        </div>
+        
+        <div class="theme-toggle">
+            <div class="mode-indicator" id="modeIndicator">
+                <i class="fas fa-moon icon"></i>
+                <span class="text">Dark Mode</span>
+            </div>
+            <div class="toggle-switch" id="themeToggle">
+                <i class="fas fa-sun toggle-icon sun"></i>
+                <i class="fas fa-moon toggle-icon moon"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="header">
+                <div class="page-title">
+                    <h1>Cek Area XL</h1>
+                    <p>Cek area XL berdasarkan kota/kabupaten</p>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Cari kota/kabupaten...">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Table Container -->
+            <div class="table-container">
+                <table class="data-table" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Provinsi</th>
+                            <th>Kota/Kabupaten</th>
+                            <th>Area</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Banten</td>
+                            <td>Kota Tangerang Selatan, Kota Tangerang, Kab. Tangerang, Kab. Pandeglang, Kab. Lebak, Kab. Serang, Kota Serang, Kota Cilegon</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>DI Yogyakarta</td>
+                            <td>Kab. Kulon Progo, Kota Yogyakarta, Kab. Sleman, Kab. Bantul, Kab. Gunungkidul</td>
+                            <td><span class="area-badge area-1">Area 1</span></td>
+                        </tr>
+                        <tr>
+                            <td>DKI Jakarta</td>
+                            <td>Kota Jakarta Pusat, Kota Jakarta Selatan, Kota Jakarta Barat, Kota Jakarta Timur, Kota Jakarta Utara</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>DKI Jakarta</td>
+                            <td>Kab. Kepulauan Seribu</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jawa Barat</td>
+                            <td>Kab. Bandung, Kab. Kuningan, Kab. Purwakarta, Kota Bandung</td>
+                            <td><span class="area-badge area-1">Area 1</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jawa Barat</td>
+                            <td>Kab. Bandung Barat, Kota Cimahi, Kab. Cirebon, Kota Cirebon, Kab. Indramayu, Kab. Subang</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jawa Barat</td>
+                            <td>Kab. Bogor, Kota Bogor, Kota Depok, Kota Bekasi, Kota Banjar, Kab. Ciamis, Kota Tasikmalaya, Kab. Majalengka, Kab. Sumedang, Kab. Bekasi, Kab. Tasikmalaya, Kab. Garut</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jawa Barat</td>
+                            <td>Kab. Cianjur, Kab. Pangandaran, Kab. Karawang, Kota Sukabumi, Kab. Sukabumi</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jawa Tengah</td>
+                            <td>Kab. Tegal, Kota Surakarta, Kota Tegal, Kab. Brebes, Kab. Kebumen, Kab. Pemalang, Kota Semarang</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jawa Tengah</td>
+                            <td>Kab. Boyolali, Kota Salatiga, Kab. Semarang, Kab. Cilacap, Kab. Grobogan, Kab. Kendal, Kab. Rembang</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jawa Tengah</td>
+                            <td>
+                                Kota Pekalongan, Kab. Pekalongan, Kab. Batang, Kab. Purbalingga, Kab. Kudus, Kab. Sukoharjo, Kab. Klaten, Kota Magelang, Kab. Banyumas, Kab. Banyumas, Kab. Magelang, Kab. Temanggung, Kab. Sragen, Kab. Banjarnegara, Kab.
+                                Karanganyar, Kab. Wonosobo, Kab. Jepara, Kab. Demak, Kab. Purworejo, Kab. Blora, Kab. Wonogiri, Kab. Pati
+                            </td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jawa Timur</td>
+                            <td>Kota Probolinggo, Kab. Bangkalan, Kab. Sidoarjo, Kab. Banyuwangi, Kota Surabaya, Kab. Sampang, Kab. Pamekasan, Kab. Sumenep, Kab. Pacitan</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jawa Timur</td>
+                            <td>Kab. Lumajang, Kab. Probolinggo</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jawa Timur</td>
+                            <td>
+                                Kab. Jombang, Kota Blitar, Kab. Blitar, Kota Kediri, Kab. Lamongan, Kab. Kediri, Kab. Ngawi, Kab. Mojokerto, Kota Mojokerto, Kab. Magetan, Kab. Gresik, Kab. Tulungagung, Kab. Nganjuk, Kab. Pasuruan, Kota Pasuruan, Kab.
+                                Bojonegoro, Kab. Madiun, Kab. Bondowoso, Kab. Tuban, Kota Madiun, Kab. Situbondo, Kab. Jember, Kota Malang, Kab. Malang, Kab. Ponorogo, Kota Batu, Kab. Trenggalek
+                            </td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Bengkulu</td>
+                            <td>Kab. Seluma</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Bengkulu</td>
+                            <td>Kab. Bengkulu Selatan, Kab. Kaur, Kab. Lebong, Kab. Rejang Lebong, Kab. Bengkulu Tengah, Kota Bengkulu, Kab. Bengkulu Utara, Kab. Kepahiang, Kab. Muko Muko</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jambi</td>
+                            <td>Kab. Batanghari, Kota Jambi, Kab. Tanjung Jabung Barat, Kab. Muaro Jambi, Kab. Sarolangun</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jambi</td>
+                            <td>Kab. Tanjung Jabung Timur, Kab. Kerinci, Kab. Bungo, Kab. Tebo, Kab. Merangin, Kota Sungai Penuh</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Kepulauan Bangka Belitung</td>
+                            <td>Kab. Bangka Selatan, Kota Pangkal Pinang, Kab. Belitung, Kab. Belitung Timur</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>Kepulauan Bangka Belitung</td>
+                            <td>Kab. Bangka, Kab. Bangka Tengah, Kab. Bangka Barat</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Kepulauan Riau</td>
+                            <td>Kota Batam</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>Kepulauan Riau</td>
+                            <td>Kab. Karimun, Kab. Bintan, Kota Tanjung Pinang</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Kepulauan Riau</td>
+                            <td>Kab. Lingga, Kab. Kepulauan Anambas, Kab. Natuna</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Lampung</td>
+                            <td>Kab. Lampung Tengah, Kab. Pringsewu, Kota Metro, Kab. Pesawaran, Kab. Lampung Selatan, Kota Bandar Lampung</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Lampung</td>
+                            <td>Kab. Lampung Barat, Kab. Lampung Timur, Kab. Tulang Bawang Barat, Kab. Way Kanan, Kab. Tulang Bawang, Kab. Tanggamus, Kab. Pesisir Barat, Kab. Lampung Utara, Kab. Mesuji</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Nanggroe Aceh Darussalam</td>
+                            <td>Kab. Aceh Barat Daya, Kab. Aceh Besar, Kota Sabang, Kab. Gayo Lues</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>Nanggroe Aceh Darussalam</td>
+                            <td>Kab. Aceh Jaya, Kab. Aceh Selatan, Kab. Aceh Tenggara, Kab. Nagan Raya, Kota Banda Aceh</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Nanggroe Aceh Darussalam</td>
+                            <td>
+                                Kab. Aceh Barat, Kab. Aceh Singkil, Kab. Aceh Tamiang, Kab. Aceh Tengah, Kota Subulussalam, Kab. Bener Meriah, Kab. Aceh Utara, Kota Lhokseumawe, Kab. Pidie, Kab. Aceh Timur, Kab. Simeulue, Kota Langsa, Kab. Bireuen, Kab. Pidie
+                                Jaya
+                            </td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Riau</td>
+                            <td>Kota Pekanbaru</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>Riau</td>
+                            <td>Kab. Kuantan Singingi, Kab. Pelalawan, Kab. Kampar, Kab. Siak, Kota Dumai, Kab. Rokan Hilir, Kab. Indragiri Hulu, Kab. Kepulauan Meranti, Kab. Bengkalis</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Riau</td>
+                            <td>Kab. Rokan Hulu, Kab. Indragiri Hilir</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sumatera Barat</td>
+                            <td>Kab. Kepulauan Mentawai</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sumatera Barat</td>
+                            <td>Kota Payakumbuh, Kota Padang Panjang, Kab. Sijunjung, Kab. Padang Pariaman, Kota Padang, Kab. Solok Selatan</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sumatera Barat</td>
+                            <td>Kab. Pasaman Barat, Kab. Pasaman, Kab. Lima Puluh Kota, Kab. Tanah Datar, Kab. Dharmasraya, Kota Solok, Kab. Agam, Kab. Solok, Kota Bukittinggi, Kota Pariaman, Kota Sawahlunto, Kab. Pesisir Selatan</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sumatera Selatan</td>
+                            <td>Kab. Ogan Komering Ilir, Kab. Penukal Abab Lematang Ilir, Kab. Banyuasin, Kota Palembang, Kab. Ogan Ilir</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sumatera Selatan</td>
+                            <td>
+                                Kab. Ogan Komering Ulu Timur, Kab. Ogan Komering Ulu Selatan, Kab. Ogan Komering Ulu, Kab. Musi Rawas, Kab. Musi Rawas Utara, Kab. Empat Lawang, Kota Pagar Alam, Kota Lubuk Linggau, Kab. Musi Banyuasin, Kab. Muara Enim, Kab.
+                                Lahat, Kota Prabumulih
+                            </td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sumatera Utara</td>
+                            <td>Kab. Karo, Kota Medan, Kab. Dairi</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sumatera Utara</td>
+                            <td>Kota Binjai, Kota Tebing Tinggi, Kab. Serdang Bedagai, Kab. Langkat, Kab. Deli Serdang, Kab. Batu Bara, Kota Tanjung Balai, Kab. Asahan, Kota Gunungsitoli, Kab. Nias Barat, Kab. Nias Selatan, Kab. Nias Utara</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sumatera Utara</td>
+                            <td>
+                                Kab. Pakpak Bharat, Kab. Mandailing Natal, Kab. Padang Lawas, Kab. Labuhanbatu Utara, Kota Padangsidimpuan, Kab. Tapanuli Selatan, Kab. Labuhanbatu Selatan, Kab. Labuhanbatu, Kab. Tapanuli Utara, Kab. Padang Lawas Utara, Kab.
+                                Humbang Hasundutan, Kab. Simalungun, Kab. Toba Samosir, Kota Pematangsiantar, Kab. Tapanuli Tengah, Kab. Samosir, Kota Sibolga, Kab. Nias
+                            </td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Kalimantan Barat</td>
+                            <td>Kab. Sekadau, Kab. Kapuas Hulu, Kab. Sintang, Kab. Bengkayang, Kab. Melawi, Kab. Sambas, Kab. Sanggau, Kab. Kubu Raya, Kota Pontianak, Kab. Kayong Utara, Kab. Landak, Kab. Mempawah, Kota Singkawang, Kab. Ketapang</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Kalimantan Selatan</td>
+                            <td>Kab. Hulu Sungai Tengah, Kab. Tapin, Kab. Hulu Sungai Utara, Kab. Tabalong, Kota Banjarmasin, Kab. Banjar, Kab. Tanah Bumbu, Kota Banjarbaru, Kab. Hulu Sungai Selatan</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>Kalimantan Selatan</td>
+                            <td>Kab. Balangan, Kab. Barito Kuala, Kab. Tanah Laut, Kab. Kotabaru</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Kalimantan Tengah</td>
+                            <td>Kab. Kapuas, Kab. Pulang Pisau, Kota Palangkaraya</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Kalimantan Tengah</td>
+                            <td>Kab. Seruyan, Kab. Kotawaringin Barat, Kab. Katingan, Kab. Kotawaringin Timur, Kab. Sukamara, Kab. Lamandau, Kab. Murung Raya, Kab. Barito Timur, Kab. Barito Utara, Kab. Barito Selatan, Kab. Gunung Mas</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Kalimantan Timur</td>
+                            <td>Kab. Penajam Paser Utara, Kota Balikpapan, Kab. Paser, Kab. Kutai Kartanegara, Kota Samarinda, Kota Bontang, Kab. Berau, Kab. Kutai Timur, Kab. Kutai Barat, Kab. Mahakam Ulu</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Kalimantan Utara</td>
+                            <td>Kab. Tana Tidung, Kab. Malinau, Kab. Bulungan, Kota Tarakan, Kab. Nunukan</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Gorontalo</td>
+                            <td>Kab. Pahuwato, Kab. Boalemo, Kab. Gorontalo, Kota Gorontalo, Kab. Gorontalo Utara, Kab. Bone Bolango</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sulawesi Barat</td>
+                            <td>Kab. Mamuju Tengah</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sulawesi Barat</td>
+                            <td>Kab. Majene, Kab. Polewali Mandar, Kab. Mamuju Utara</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sulawesi Barat</td>
+                            <td>Kab. Mamuju, Kab. Mamasa</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sulawesi Selatan</td>
+                            <td>Kab. Barru, Kota Pare Pare, Kab. Pinrang</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sulawesi Selatan</td>
+                            <td>Kab. Sinjai, Kab. Enrekang, Kab. Sidenreng Rappang, Kab. Luwu Timur, Kab. Soppeng, Kab. Tana Toraja</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sulawesi Selatan</td>
+                            <td>Kab. Kepulauan Selayar, Kab. Takalar, Kab. Jeneponto, Kab. Bulukumba, Kab. Pangkajene Kepulauan, Kota Makassar, Kab. Gowa, Kab. Maros, Kab. Bone, Kab. Wajo, Kab. Luwu, Kab. Luwu Utara, Kota Palopo, Kab. Toraja Utara</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sulawesi Tengah</td>
+                            <td>Kab. Banggai Kepulauan, Kab. Banggai Laut, Kota Palu, Kab. Toli Toli, Kab. Tojo Una Una, Kab. Morowali, Kab. Morowali Utara</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sulawesi Tengah</td>
+                            <td>Kab. Banggai, Kab. Parigi Moutong, Kab. Donggala, Kab. Sigi, Kab. Poso, Kab. Buol</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sulawesi Tenggara</td>
+                            <td>Kab. Konawe Kepulauan, Kab. Konawe Utara, Kab. Buton Utara, Kab. Wakatobi</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sulawesi Tenggara</td>
+                            <td>Kota Bau Bau, Kab. Muna, Kab. Buton Selatan, Kab. Buton Tengah, Kab. Muna Barat</td>
+                            <td><span class="area-badge area-3">Area 3</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sulawesi Tenggara</td>
+                            <td>Kab. Kolaka, Kab. Kolaka Utara, Kab. Konawe, Kab. Konawe Selatan, Kota Kendari, Kab. Kolaka Timur, Kab. Buton, Kab. Bombana</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sulawesi Utara</td>
+                            <td>
+                                Kab. Bolaang Mongondow, Kab. Bolaang Mongondow Selatan, Kota Kotamobagu, Kab. Minahasa Selatan, Kab. Bolaang Mongondow Timur, Kab. Minahasa Tenggara, Kab. Bolaang Mongondow Utara, Kota Tomohon, Kab. Minahasa, Kota Manado, Kab.
+                                Minahasa Utara, Kota Bitung, Kab. Kepulauan Sangihe, Kab. Kepulauan Talaud, Kab. Siau Tagulandang Biaro
+                            </td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Bali</td>
+                            <td>Kab. Jembrana, Kab. Buleleng</td>
+                            <td><span class="area-badge area-1">Area 1</span></td>
+                        </tr>
+                        <tr>
+                            <td>Bali</td>
+                            <td>Kab. Badung, Kab. Karangasem, Kab. Tabanan, Kab. Bangli, Kab. Gianyar, Kab. Klungkung, Kota Denpasar</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>Nusa Tenggara Barat</td>
+                            <td>Kab. Lombok Barat, Kab. Lombok Timur, Kota Mataram, Kab. Lombok Tengah, Kab. Lombok Utara, Kab. Sumbawa Barat, Kab. Sumbawa, Kota Bima, Kab. Dompu</td>
+                            <td><span class="area-badge area-2">Area 2</span></td>
+                        </tr>
+                        <tr>
+                            <td>Nusa Tenggara Barat</td>
+                            <td>Kab. Bima</td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Nusa Tenggara Timur</td>
+                            <td>
+                                Kab. Alor, Kota Kupang, Kab. Kupang, Kab. Malaka, Kab. Manggarai Barat, Kab. Timor Tengah Selatan, Kab. Belu, Kab. Sikka, Kab. Timor Tengah Utara, Kab. Lembata, Kab. Manggarai Timur, Kab. Ende, Kab. Sumba Barat Daya, Kab. Rote
+                                Ndao, Kab. Nagekeo, Kab. Flores Timur, Kab. Ngada, Kab. Sumba Tengah, Kab. Manggarai, Kab. Sumba Barat, Kab. Sumba Timur, Kab. Sabu Raijua
+                            </td>
+                            <td><span class="area-badge area-4">Area 4</span></td>
+                        </tr>
+                        <tr>
+                            <td>Maluku</td>
+                            <td>Kab. Maluku Tenggara Barat, Kab. Kepulauan Aru, Kota Tual, Kab. Seram Bagian Barat, Kab. Maluku Tengah, Kab. Seram Bagian Timur, Kota Ambon, Kab. Maluku Tenggara, Kab. Maluku Barat Daya, Kab. Buru Selatan, Kab. Buru</td>
+                            <td><span class="area-badge area-1">Area 1</span></td>
+                        </tr>
+                        <tr>
+                            <td>Maluku Utara</td>
+                            <td>Kab. Halmahera Barat, Kab. Halmahera Utara, Kab. Kepulauan Sula, Kab. Halmahera Timur, Kab. Pulau Taliabu, Kab. Halmahera Selatan, Kota Tidore Kepulauan, Kota Ternate, Kab. Halmahera Tengah, Kab. Pulau Morotai</td>
+                            <td><span class="area-badge area-1">Area 1</span></td>
+                        </tr>
+                        <tr>
+                            <td>Papua</td>
+                            <td>
+                                Kab. Asmat, Kab. Jayapura, Kab. Mimika, Kab. Keerom, Kab. Biak Numfor, Kota Jayapura, Kab. Kepulauan Yapen, Kab. Boven Digoel, Kab. Merauke, Kab. Deiyai, Kab. Dogiyai, Kab. Intan Jaya, Kab. Jayawijaya, Kab. Lanny Jaya, Kab.
+                                Mamberamo Raya, Kab. Mamberamo Tengah, Kab. Mappi, Kab. Nabire, Kab. Nduga, Kab. Paniai, Kab. Pegunungan Bintang, Kab. Puncak, Kab. Puncak Jaya, Kab. Sarmi, Kab. Supiori, Kab. Tolikara, Kab. Waropen, Kab. Yahukimo, Kab. Yalimo
+                            </td>
+                            <td><span class="area-badge area-1">Area 1</span></td>
+                        </tr>
+                        <tr>
+                            <td>Papua Barat</td>
+                            <td>
+                                Kab. Teluk Bintuni, Kab. Sorong Selatan, Kab. Sorong, Kab. Teluk Wondama, Kota Sorong, Kab. Manokwari, Kab. Fak Fak, Kab. Kaimana, Kab. Manokwari Selatan, Kab. Maybrat, Kab. Pegunungan Arfak, Kab. Raja Ampat, Kab. Tambrauw
+                            </td>
+                            <td><span class="area-badge area-1">Area 1</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- About Section -->
+            <div class="about-section">
+                <p>"Informasi area XL berdasarkan kota dan kabupaten di seluruh Indonesia."</p>
+            </div>
+        </div>
+        
+        <!-- Footer yang Diperbaiki -->
+        <div class="footer">
+            <div class="footer-store">Snayders Store v0.01</div>
+            <div class="footer-contact">
+                <a href="mailto:snaydersonly@gmail.com" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://wa.me/6287866361260" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://facebook.com/snayderstore.2025" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://t.me/snayderstore" target="_blank" title="Telegram">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 Snayders Store. All rights reserved.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('mobile-visible');
+        });
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (event) => {
+            if (window.innerWidth <= 768) {
+                if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                    sidebar.classList.remove('mobile-visible');
+                }
+            }
+        });
+
+        // Swipe to close sidebar on mobile
+        let startX = 0;
+        let currentX = 0;
+        let sidebarVisible = false;
+
+        document.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            sidebarVisible = sidebar.classList.contains('mobile-visible');
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (window.innerWidth <= 768 && sidebarVisible) {
+                currentX = e.touches[0].clientX;
+                let diff = startX - currentX;
+                // Jika swipe ke kiri lebih dari 50px, tutup sidebar
+                if (diff > 50) {
+                    sidebar.classList.remove('mobile-visible');
+                }
+            }
+        });
+
+        // Swipe to open sidebar on mobile (from left edge)
+        document.addEventListener('touchstart', (e) => {
+            if (window.innerWidth <= 768 && !sidebarVisible) {
+                startX = e.touches[0].clientX;
+                // Jika sentuhan dimulai dari area 20px dari kiri
+                if (startX <= 20) {
+                    sidebarVisible = true;
+                }
+            }
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (window.innerWidth <= 768 && !sidebar.classList.contains('mobile-visible') && sidebarVisible) {
+                currentX = e.touches[0].clientX;
+                let diff = currentX - startX;
+                // Jika swipe ke kanan lebih dari 50px, buka sidebar
+                if (diff > 50) {
+                    sidebar.classList.add('mobile-visible');
+                }
+            }
+        });
+
+        // Dark/Light mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const modeIndicator = document.getElementById('modeIndicator');
+        const modeIcon = modeIndicator.querySelector('.icon');
+        const modeText = modeIndicator.querySelector('.text');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to dark
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            body.classList.add('light-mode');
+            modeText.textContent = 'Light Mode';
+            modeIcon.className = 'fas fa-sun icon';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            // Update the mode indicator
+            if (body.classList.contains('light-mode')) {
+                modeText.textContent = 'Light Mode';
+                modeIcon.className = 'fas fa-sun icon';
+            } else {
+                modeText.textContent = 'Dark Mode';
+                modeIcon.className = 'fas fa-moon icon';
+            }
+            
+            // Save the current theme to localStorage
+            const theme = body.classList.contains('light-mode') ? 'light' : 'dark';
+            localStorage.setItem('theme', theme);
+        });
+
+        // PERBAIKAN: Tools dropdown functionality
+        const toolsDropdown = document.getElementById('toolsDropdown');
+        
+        toolsDropdown.addEventListener('click', (e) => {
+            // Mencegah event bubbling agar tidak tertutup saat mengklik dropdown
+            e.stopPropagation();
+            toolsDropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!toolsDropdown.contains(event.target)) {
+                toolsDropdown.classList.remove('active');
+            }
+        });
+
+        // Search functionality
+        function searchTable() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById("dataTable");
+            const tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) {
+                const td = tr[i].getElementsByTagName("td");
+                let found = false;
+
+                for (let j = 0; j < td.length; j++) {
+                    const cell = td[j];
+                    if (cell) {
+                        const txtValue = cell.textContent || cell.innerText;
+                        // Reset cell content to plain text
+                        if (j === 2) { // Area column
+                            cell.innerHTML = txtValue;
+                        } else {
+                            cell.innerHTML = txtValue.replace(/<span class="highlight">|<\/span>/g, '');
+                        }
+                        
+                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                            found = true;
+                            // Highlight the matching text
+                            if (j !== 2) { // Don't highlight area column
+                                const highlightedText = txtValue.replace(new RegExp(`(${filter})`, "gi"), '<span class="highlight">$1</span>');
+                                cell.innerHTML = highlightedText;
+                            }
+                        }
+                    }
+                }
+
+                tr[i].style.display = found ? "" : "none";
+            }
+        }
+
+        // Event listener for search input
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', searchTable);
+    </script>
+</body>
+</html>
