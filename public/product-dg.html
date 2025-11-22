@@ -637,7 +637,7 @@ function closeBuyerModal() {
             
             // Validasi: Nama wajib
             if (!fullname) {
-                showWarning('Nama lengkap wajib diisi.');
+                showBuyerWarning('Nama lengkap wajib diisi.');
                 return;
             }
             
@@ -649,7 +649,7 @@ function closeBuyerModal() {
             
             // Peringatan jika nomor WhatsApp kosong (tapi tidak menghentikan proses)
             if (!phone) {
-                showWarning('Jika produk yang dipesan memerlukan nomor telepon, harap isi pada bagian nomor telepon tersebut. Lewati jika tidak diperlukan.');
+                showBuyerWarning('Jika produk yang dipesan memerlukan nomor telepon, harap isi pada bagian nomor telepon tersebut. Lewati jika tidak diperlukan.');
                 // Jangan return, karena nomor WhatsApp opsional
             }
             
